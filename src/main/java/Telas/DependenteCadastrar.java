@@ -1,13 +1,13 @@
 package Telas;
 
 import br.com.senac.projetointegradordb.Dependente;
-import br.com.senac.projetointegradordb.DependenteDAO;
+import DAO.DependenteDAO;
 import br.com.senac.projetointegradordb.Endereco;
-import br.com.senac.projetointegradordb.EnderecoDAO;
+import DAO.EnderecoDAO;
 import br.com.senac.projetointegradordb.ExceptionVazio;
 import br.com.senac.projetointegradordb.Militar;
 import br.com.senac.projetointegradordb.RelacaoDependencia;
-import br.com.senac.projetointegradordb.RelacaoDependenciaDAO;
+import DAO.RelacaoDependenciaDAO;
 import br.com.senac.projetointegradordb.WebService;
 import java.time.format.DateTimeParseException;
 import java.util.List;

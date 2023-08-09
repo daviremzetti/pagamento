@@ -1,11 +1,11 @@
 package Telas;
 
-import br.com.senac.projetointegradordb.DependenteDAO;
+import DAO.DependenteDAO;
 import br.com.senac.projetointegradordb.ExceptionVazio;
 import br.com.senac.projetointegradordb.Lotacao;
 import br.com.senac.projetointegradordb.Militar;
 import br.com.senac.projetointegradordb.Movimentacao;
-import br.com.senac.projetointegradordb.MovimentacaoDAO;
+import DAO.MovimentacaoDAO;
 import br.com.senac.projetointegradordb.StringToLocalDate;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;

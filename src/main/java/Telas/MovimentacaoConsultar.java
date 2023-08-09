@@ -2,7 +2,7 @@
 package Telas;
 
 import br.com.senac.projetointegradordb.Movimentacao;
-import br.com.senac.projetointegradordb.MovimentacaoDAO;
+import DAO.MovimentacaoDAO;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 public class MovimentacaoConsultar extends javax.swing.JFrame {

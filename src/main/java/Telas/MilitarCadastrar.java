@@ -1,14 +1,14 @@
 package Telas;
 
 import br.com.senac.projetointegradordb.Endereco;
-import br.com.senac.projetointegradordb.EnderecoDAO;
+import DAO.EnderecoDAO;
 import br.com.senac.projetointegradordb.ExceptionVazio;
 import br.com.senac.projetointegradordb.Lotacao;
-import br.com.senac.projetointegradordb.LotacaoDAO;
+import DAO.LotacaoDAO;
 import br.com.senac.projetointegradordb.Militar;
-import br.com.senac.projetointegradordb.MilitarDAO;
+import DAO.MilitarDAO;
 import br.com.senac.projetointegradordb.PostoGraduacao;
-import br.com.senac.projetointegradordb.PostoGraduacaoDAO;
+import DAO.PostoGraduacaoDAO;
 import br.com.senac.projetointegradordb.WebService;
 import java.time.format.DateTimeParseException;
 import java.util.List;

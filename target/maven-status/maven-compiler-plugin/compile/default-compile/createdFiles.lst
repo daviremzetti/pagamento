@@ -1,6 +1,4 @@
-br/com/senac/projetointegradordb/DependenteDAO.class
 Telas/PostoGraduacaoCadastrar$11.class
-br/com/senac/projetointegradordb/LotacaoDAO.class
 Telas/MovimentacaoConsultar$11.class
 Telas/MovimentacaoConsultar$7.class
 Telas/MilitarConsultarPara$15.class
@@ -38,6 +36,7 @@ Telas/MilitarCadastrar$10.class
 Telas/MilitarConsultar$12.class
 Telas/ContrachequeConsultar$11.class
 Telas/MilitarConsultarPara$10.class
+DAO/CompetenciaDAO.class
 Telas/MovimentacaoConsultar$12.class
 Telas/DependenteConsultar$10.class
 br/com/senac/projetointegradordb/Endereco.class
@@ -90,8 +89,8 @@ Telas/MovimentacaoConsultar$6.class
 Telas/TelaPrincipal$14.class
 Telas/PostoGraduacaoCadastrar$12.class
 Telas/MovimentacaoCadastrar$18.class
-br/com/senac/projetointegradordb/RelacaoDependenciaDAO.class
 br/com/senac/projetointegradordb/Militar.class
+Persistencia/JPA.class
 Telas/MilitarCadastrar$12.class
 Telas/MovimentacaoConsultar$9.class
 br/com/senac/projetointegradordb/WebService.class
@@ -110,7 +109,6 @@ Telas/PostoGraduacaoCadastrar$8.class
 Telas/ContrachequeGerar$8.class
 Telas/ContrachequeGerar$13.class
 br/com/senac/projetointegradordb/Movimentacao.class
-br/com/senac/projetointegradordb/MilitarDAO.class
 Telas/MilitarConsultar$5.class
 Telas/MovimentacaoCadastrar$1.class
 Telas/PostoGraduacaoConsultar$2.class
@@ -128,13 +126,14 @@ Telas/LotacaoConsultar$4.class
 Telas/LotacaoConsultar$19.class
 Telas/ContrachequeGerar$7.class
 Telas/PostoGraduacaoCadastrar$7.class
-br/com/senac/projetointegradordb/MovimentacaoDAO.class
 Telas/LotacaoCadastrar$9.class
 Telas/MilitarConsultarPara$1.class
 Telas/DependenteCadastrar$11.class
 Telas/PostoGraduacaoCadastrar$13.class
 Telas/PostoGraduacaoConsultar$1.class
 Telas/DependenteConsultar$9.class
+DAO/DependenteDAO.class
+DAO/MovimentacaoDAO.class
 Telas/LotacaoConsultar.class
 Telas/TelaPrincipal$13.class
 Telas/DependenteCadastrar$2.class
@@ -159,15 +158,16 @@ Telas/LotacaoCadastrar$18.class
 Telas/LotacaoConsultar$20.class
 Telas/LotacaoConsultar$13.class
 Telas/MovimentacaoCadastrar.class
-br/com/senac/projetointegradordb/ContrachequeDAO.class
 br/com/senac/projetointegradordb/RelacaoDependencia.class
 Telas/ContrachequeConsultar$15.class
 Telas/LotacaoConsultarPara$2.class
 Telas/LotacaoConsultar$6.class
 Telas/PostoGraduacaoConsultar$14.class
 Telas/LotacaoCadastrar.class
+DAO/RelacaoDependenciaDAO.class
 Telas/PostoGraduacaoCadastrar$2.class
 Telas/MovimentacaoCadastrar$14.class
+DAO/PostoGraduacaoDAO.class
 Telas/LotacaoCadastrar$12.class
 Telas/DependenteCadastrar$12.class
 Telas/MilitarCadastrar$19.class
@@ -191,9 +191,10 @@ Telas/MilitarConsultarPara$5.class
 Telas/MovimentacaoConsultar$5.class
 Telas/ContrachequeGerar$9.class
 Telas/MovimentacaoCadastrar$9.class
+DAO/LotacaoDAO.class
+DAO/ContrachequeDAO.class
 Telas/MilitarConsultarPara$4.class
 Telas/MilitarConsultarPara$11.class
-br/com/senac/projetointegradordb/PostoGraduacaoDAO.class
 Telas/ContrachequeGerar$4.class
 br/com/senac/projetointegradordb/Contracheque.class
 Telas/MilitarConsultar$13.class
@@ -216,7 +217,6 @@ Telas/PostoGraduacaoCadastrar$3.class
 Telas/LotacaoCadastrar$14.class
 Telas/LotacaoCadastrar$5.class
 Telas/PostoGraduacaoConsultar$13.class
-br/com/senac/projetointegradordb/CompetenciaDAO.class
 Telas/MilitarCadastrar$18.class
 Telas/MovimentacaoConsultar$3.class
 Telas/MovimentacaoCadastrar$6.class
@@ -232,7 +232,7 @@ Telas/LotacaoConsultar$14.class
 Telas/DependenteConsultar$1.class
 Telas/PostoGraduacaoConsultar$16.class
 Telas/DependenteCadastrar$16.class
-br/com/senac/projetointegradordb/EnderecoDAO.class
+DAO/MilitarDAO.class
 Telas/TelaPrincipal$5.class
 Telas/MovimentacaoConsultar$10.class
 Telas/DependenteConsultar$4.class
@@ -263,6 +263,7 @@ Telas/MilitarConsultar$16.class
 Telas/DependenteConsultar.class
 Telas/LotacaoConsultarPara$6.class
 Telas/MovimentacaoConsultar.class
+DAO/EnderecoDAO.class
 Telas/ContrachequeGerar$1.class
 Telas/PostoGraduacaoConsultar$8.class
 Telas/MilitarConsultarPara$8.class
@@ -284,4 +285,3 @@ Telas/MovimentacaoConsultar$1.class
 Telas/MilitarCadastrar$3.class
 Telas/ContrachequeConsultar$13.class
 Telas/LotacaoCadastrar$17.class
-br/com/senac/projetointegradordb/JPA.class

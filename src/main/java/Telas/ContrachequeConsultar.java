@@ -1,7 +1,7 @@
 package Telas;
 
 import br.com.senac.projetointegradordb.Contracheque;
-import br.com.senac.projetointegradordb.ContrachequeDAO;
+import DAO.ContrachequeDAO;
 import br.com.senac.projetointegradordb.ExceptionVazio;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  * Classe da tela de consulta de contracheque
+ *
  * @author daviremzetti
  */
 public class ContrachequeConsultar extends javax.swing.JFrame {
@@ -464,62 +465,70 @@ public class ContrachequeConsultar extends javax.swing.JFrame {
             ContrachequeDAO dao = new ContrachequeDAO();
             Contracheque contracheque = dao.consultar(matricula, competencia);
 
-            DefaultTableModel tabelaModelo = (DefaultTableModel) TbLista.getModel();
-            tabelaModelo.setNumRows(0);
-
-            String[] linha1 = {
-                "Subsídio", String.valueOf(contracheque.getSubsidio())
-            };
-            tabelaModelo.addRow(linha1);
-
-            if (contracheque.getValorAjudaCusto() > 0) {
-                String[] linha2 = {
-                    "Ajuda de custo", String.valueOf(contracheque.getValorAjudaCusto())
-                };
-                tabelaModelo.addRow(linha2);
-            }
-
-            String[] linha3 = {
-                "Salário Bruto", String.valueOf(contracheque.getSalarioBruto())
-            };
-            tabelaModelo.addRow(linha3);
-            String[] linha4 = {
-                "Previdência", String.valueOf(contracheque.getValorPrevidencia())
-            };
-            tabelaModelo.addRow(linha4);
-            String[] linha5 = {
-                "Imposto de Renda", String.valueOf(contracheque.getValorImpostoRenda())
-            };
-            tabelaModelo.addRow(linha5);
-            String[] linha6 = {
-                "Salário Líquido", String.valueOf(contracheque.getSalarioLiquido())
-            };
-            tabelaModelo.addRow(linha6);
-
             if (contracheque == null) {
                 JOptionPane.showMessageDialog(null, "Não existe contracheque para o militar e a data informados ");
             }
-            TbLista.setModel(tabelaModelo);
+            else{
+                this.listar(contracheque);
+            }
+            
         } catch (ExceptionVazio e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
 
 
     }//GEN-LAST:event_BtListarActionPerformed
- 
+
+    public void listar(Contracheque contracheque) {
+        DefaultTableModel tabelaModelo = (DefaultTableModel) TbLista.getModel();
+        tabelaModelo.setNumRows(0);
+
+        String[] linha1 = {
+            "Subsídio", String.valueOf(contracheque.getSubsidio())
+        };
+        tabelaModelo.addRow(linha1);
+
+        if (contracheque.getValorAjudaCusto() > 0) {
+            String[] linha2 = {
+                "Ajuda de custo", String.valueOf(contracheque.getValorAjudaCusto())
+            };
+            tabelaModelo.addRow(linha2);
+        }
+
+        String[] linha3 = {
+            "Salário Bruto", String.valueOf(contracheque.getSalarioBruto())
+        };
+        tabelaModelo.addRow(linha3);
+        String[] linha4 = {
+            "Previdência", String.valueOf(contracheque.getValorPrevidencia())
+        };
+        tabelaModelo.addRow(linha4);
+        String[] linha5 = {
+            "Imposto de Renda", String.valueOf(contracheque.getValorImpostoRenda())
+        };
+        tabelaModelo.addRow(linha5);
+        String[] linha6 = {
+            "Salário Líquido", String.valueOf(contracheque.getSalarioLiquido())
+        };
+        tabelaModelo.addRow(linha6);
+        TbLista.setModel(tabelaModelo);
+    }
+
     /**
      * Método para conferir se todos os campos foram preenchidos
-     * @throws ExceptionVazio 
+     *
+     * @throws ExceptionVazio
      */
     private void conferirCampos() throws ExceptionVazio {
         if (TfNome.getText().isEmpty() || TfAno.getText().isEmpty()) {
             throw new ExceptionVazio();
         }
     }
-    
+
     /**
      * Função para captar o mês selecionado pelo usuário
-     * @return 
+     *
+     * @return
      */
     private int gerarMes() {
         int mes = CbMes.getSelectedIndex() + 1;

@@ -5,14 +5,14 @@
 package Telas;
 
 import br.com.senac.projetointegradordb.Competencia;
-import br.com.senac.projetointegradordb.CompetenciaDAO;
+import DAO.CompetenciaDAO;
 import br.com.senac.projetointegradordb.Contracheque;
-import br.com.senac.projetointegradordb.ContrachequeDAO;
+import DAO.ContrachequeDAO;
 import br.com.senac.projetointegradordb.ImpostoRenda;
 import br.com.senac.projetointegradordb.Militar;
-import br.com.senac.projetointegradordb.MilitarDAO;
+import DAO.MilitarDAO;
 import br.com.senac.projetointegradordb.Movimentacao;
-import br.com.senac.projetointegradordb.MovimentacaoDAO;
+import DAO.MovimentacaoDAO;
 import java.time.LocalDate;
 import java.util.List;
 import javax.swing.JOptionPane;

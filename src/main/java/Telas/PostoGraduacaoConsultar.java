@@ -1,7 +1,7 @@
 package Telas;
 
 import br.com.senac.projetointegradordb.PostoGraduacao;
-import br.com.senac.projetointegradordb.PostoGraduacaoDAO;
+import DAO.PostoGraduacaoDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;

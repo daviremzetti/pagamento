@@ -1,7 +1,7 @@
 package Telas;
 
 import br.com.senac.projetointegradordb.Lotacao;
-import br.com.senac.projetointegradordb.LotacaoDAO;
+import DAO.LotacaoDAO;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
