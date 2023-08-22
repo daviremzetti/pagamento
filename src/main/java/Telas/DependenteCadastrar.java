@@ -3,18 +3,19 @@ package Telas;
 import br.com.senac.projetointegradordb.Dependente;
 import DAO.DependenteDAO;
 import br.com.senac.projetointegradordb.Endereco;
-import DAO.EnderecoDAO;
-import br.com.senac.projetointegradordb.ExceptionVazio;
+import Exceptions.ExceptionVazio;
 import br.com.senac.projetointegradordb.Militar;
 import br.com.senac.projetointegradordb.RelacaoDependencia;
 import DAO.RelacaoDependenciaDAO;
-import br.com.senac.projetointegradordb.WebService;
+import Servicos.DependenteServicos;
+import Servicos.EnderecoServicos;
+import Servicos.RelacaoDependenciaServicos;
+import Servicos.WebService;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import org.json.JSONException;
-import org.json.JSONObject;
+
 
 /**
  * Classe da tela de cadastro de dependente
@@ -610,13 +611,20 @@ public class DependenteCadastrar extends javax.swing.JFrame {
     }//GEN-LAST:event_ConsultarMilitarActionPerformed
 
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
-        Endereco novoEndereco = this.cadastrarEndereco();
-        RelacaoDependenciaDAO daoRel = new RelacaoDependenciaDAO();
-        DependenteDAO daoDep = new DependenteDAO();
-
+        RelacaoDependenciaServicos servicoRelDep = new RelacaoDependenciaServicos();
+        DependenteServicos servicoDependente = new DependenteServicos();
+        EnderecoServicos servicoEndereco = new EnderecoServicos();
+        servicoEndereco.setEndereco(endereco);
+        
+        String numero = TfNumero.getText();
+        String cep = TfCep.getText();
+        String relacaoSelecionada = CbxRelacao.getSelectedItem().toString();
+        
+        Endereco novoEndereco = servicoEndereco.cadastrar(numero, cep);
+        
         String nome = TfNome.getText().toUpperCase();
         String cpf = TfCpf.getText();
-        RelacaoDependencia relacao = daoRel.filtrar(CbxRelacao.getSelectedItem().toString());
+        RelacaoDependencia relacao = servicoRelDep.filtrar(relacaoSelecionada);
 
         try {
             this.conferirCampos();
@@ -627,7 +635,7 @@ public class DependenteCadastrar extends javax.swing.JFrame {
             dep.setEndereco(novoEndereco);
             dep.setRelacaoDependencia(relacao);
 
-            boolean cadastrado = daoDep.cadastrar(dep);
+            boolean cadastrado = servicoDependente.cadastrar(dep);
 
             if (cadastrado == true) {
                 JOptionPane.showMessageDialog(null, "Dependente cadastrado com sucesso!");
@@ -657,7 +665,7 @@ public class DependenteCadastrar extends javax.swing.JFrame {
             throw new ExceptionVazio();
         }
     }
-    
+
     private void ContGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContGerarActionPerformed
         ContrachequeGerar novoContracheque = new ContrachequeGerar();
         this.setVisible(false);
@@ -671,52 +679,33 @@ public class DependenteCadastrar extends javax.swing.JFrame {
     }//GEN-LAST:event_ContConsultarActionPerformed
 
     private void BtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtBuscarActionPerformed
-        String cep = TfCep.getText().replace("-", "");
-        WebService ws = new WebService();
-        endereco = ws.buscarCep(cep);
-        String logradouro = ws.getLogradouro();
-        String bairro = ws.getBairro();
-        String cidade = ws.getCidade();
-        String estado = ws.getEstado();
-        this.setCampos(logradouro, bairro, cidade, estado);
+        try {
+            String cep = TfCep.getText().replace("-", "");
+            WebService ws = new WebService();
+            endereco = ws.buscarCep(cep);
+            String logradouro = ws.getLogradouro();
+            String bairro = ws.getBairro();
+            String cidade = ws.getCidade();
+            String estado = ws.getEstado();
+            setCampos(logradouro, bairro, cidade, estado);
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Preencher campo CEP");
+        }
+
     }//GEN-LAST:event_BtBuscarActionPerformed
-    
+
     public void setCampos(String logradouro, String bairro, String cidade, String estado) {
         TfLogradouro.setText(logradouro);
         TfBairro.setText(bairro);
         TfCidade.setText(cidade);
         CbxUf.setSelectedItem(estado);
     }
-    
+
     public void limparCampos() {
         TfNome.setText("");
         TfCpf.setText("");
         TfMatricula.setText("");
 
-    }
-    
-    public Endereco cadastrarEndereco() {
-        String numero = TfNumero.getText();
-        String cep = TfCep.getText();
-        EnderecoDAO dao = new EnderecoDAO();
-        Endereco novoEndereco = dao.consultar(cep, numero);
-        try {
-            if (novoEndereco == null) {
-                novoEndereco = new Endereco();
-                JSONObject objetoJson = new JSONObject(endereco);
-                novoEndereco.setLogradouro(objetoJson.getString("logradouro").toUpperCase());
-                novoEndereco.setNumero(numero);
-                novoEndereco.setBairro(objetoJson.getString("bairro").toUpperCase());
-                novoEndereco.setCidade(objetoJson.getString("localidade").toUpperCase());
-                novoEndereco.setUf(objetoJson.getString("uf").toUpperCase());
-                novoEndereco.setCep(objetoJson.getString("cep"));
-                dao.cadastrar(novoEndereco);
-            }
-            
-        } catch (JSONException e) {
-            JOptionPane.showMessageDialog(null, "Endereço não salvo no banco de dados");
-        }
-        return novoEndereco;
     }
 
     /**

@@ -26,9 +26,9 @@ public class EnderecoDAO {
     
     public Endereco consultar(String cep, String numero){
         EntityManager em = JPA.getEntityManager();
-        Endereco endereco = null;
+        Endereco endereco;
         try{
-            Query consulta = em.createQuery("SELECT c FROM cep c WHERE c.cep = :cep AND c.numero =: numero");
+            Query consulta = em.createQuery("SELECT e FROM Endereco e WHERE e.cep = :cep AND e.numero =: numero");
             consulta.setParameter("cep", cep);
             consulta.setParameter("numero", numero);
             endereco = (Endereco) consulta.getSingleResult();

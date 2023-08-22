@@ -2,20 +2,19 @@ package Telas;
 
 import br.com.senac.projetointegradordb.Endereco;
 import DAO.EnderecoDAO;
-import br.com.senac.projetointegradordb.ExceptionVazio;
+import Exceptions.ExceptionVazio;
 import br.com.senac.projetointegradordb.Lotacao;
 import DAO.LotacaoDAO;
 import br.com.senac.projetointegradordb.Militar;
 import DAO.MilitarDAO;
 import br.com.senac.projetointegradordb.PostoGraduacao;
 import DAO.PostoGraduacaoDAO;
-import br.com.senac.projetointegradordb.WebService;
+import Servicos.EnderecoServicos;
+import Servicos.WebService;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Classe da tela de cadastro de militar
@@ -498,7 +497,12 @@ public class MilitarCadastrar extends javax.swing.JFrame {
     }//GEN-LAST:event_TfNomeActionPerformed
 
     private void InserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InserirActionPerformed
-        Endereco novoEndereco = this.cadastrarEndereco();
+        String numero = TfNumero.getText();
+        String cep = TfCep.getText();
+        EnderecoServicos servicoEndereco = new EnderecoServicos();
+        servicoEndereco.setEndereco(endereco);
+        Endereco novoEndereco = servicoEndereco.cadastrar(numero, cep);
+        
         String nome = TfNome.getText().toUpperCase();
         String cpf = TfCpf.getText();
         String matricula = TfMatricula.getText();
@@ -702,29 +706,6 @@ public class MilitarCadastrar extends javax.swing.JFrame {
         CbxUf.setSelectedItem(estado);
     }
 
-    public Endereco cadastrarEndereco() {
-        String numero = TfNumero.getText();
-        String cep = TfCep.getText();
-        EnderecoDAO dao = new EnderecoDAO();
-        Endereco novoEndereco = dao.consultar(cep, numero);
-        try {
-            if (novoEndereco == null) {
-                novoEndereco = new Endereco();
-                JSONObject objetoJson = new JSONObject(endereco);
-                novoEndereco.setLogradouro(objetoJson.getString("logradouro").toUpperCase());
-                novoEndereco.setNumero(numero);
-                novoEndereco.setBairro(objetoJson.getString("bairro").toUpperCase());
-                novoEndereco.setCidade(objetoJson.getString("localidade").toUpperCase());
-                novoEndereco.setUf(objetoJson.getString("uf").toUpperCase());
-                novoEndereco.setCep(objetoJson.getString("cep"));
-                dao.cadastrar(novoEndereco);
-            }
-
-        } catch (JSONException e) {
-            JOptionPane.showMessageDialog(null, "Endereço não salvo no banco de dados");
-        }
-        return novoEndereco;
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtBuscar;

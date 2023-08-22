@@ -1,7 +1,7 @@
 package Telas;
 
-import br.com.senac.projetointegradordb.ExceptionBatalhaoVazio;
-import br.com.senac.projetointegradordb.ExceptionLotacao;
+import Exceptions.ExceptionBatalhaoVazio;
+import Exceptions.ExceptionLotacao;
 import br.com.senac.projetointegradordb.Lotacao;
 import DAO.LotacaoDAO;
 import javax.swing.JOptionPane;

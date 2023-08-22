@@ -1,8 +1,8 @@
 package Telas;
 
 import br.com.senac.projetointegradordb.Contracheque;
-import DAO.ContrachequeDAO;
-import br.com.senac.projetointegradordb.ExceptionVazio;
+import Exceptions.ExceptionVazio;
+import Servicos.ContrachequeServicos;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -455,28 +455,21 @@ public class ContrachequeConsultar extends javax.swing.JFrame {
 
         try {
             this.conferirCampos();
-
             int mes = this.gerarMes();
             int ano = Integer.parseInt(TfAno.getText());
             LocalDate competencia = LocalDate.of(ano, mes, 01);
-
             String matricula = TfMatricula.getText();
-
-            ContrachequeDAO dao = new ContrachequeDAO();
-            Contracheque contracheque = dao.consultar(matricula, competencia);
-
+            ContrachequeServicos servicoContracheque = new ContrachequeServicos();
+            Contracheque contracheque = servicoContracheque.consultar(matricula, competencia);
             if (contracheque == null) {
                 JOptionPane.showMessageDialog(null, "Não existe contracheque para o militar e a data informados ");
             }
             else{
-                this.listar(contracheque);
-            }
-            
+                listar(contracheque);
+            }           
         } catch (ExceptionVazio e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-
-
     }//GEN-LAST:event_BtListarActionPerformed
 
     public void listar(Contracheque contracheque) {

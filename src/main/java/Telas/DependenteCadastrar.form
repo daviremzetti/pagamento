@@ -358,7 +358,7 @@
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;&gt;()"/>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="DefaultComboBoxModel modelo = new DefaultComboBoxModel();&#xa;RelacaoDependenciaDAO dao = new RelacaoDependenciaDAO();&#xa;List &lt;RelacaoDependencia&gt; lista = dao.listar();&#xa;for(int i = 0; i &lt; lista.size(); i++){&#xa;    String nome = lista.get(i).getNomeRelacao();&#xa;&#xa;    modelo.addElement(nome);&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="DefaultComboBoxModel modelo = new DefaultComboBoxModel();&#xa;DAO.RelacaoDependenciaServicos dao = new DAO.RelacaoDependenciaServicos();&#xa;List &lt;RelacaoDependencia&gt; lista = dao.listar();&#xa;for(int i = 0; i &lt; lista.size(); i++){&#xa;    String nome = lista.get(i).getNomeRelacao();&#xa;&#xa;    modelo.addElement(nome);&#xa;}"/>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>

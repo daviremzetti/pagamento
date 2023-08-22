@@ -53,17 +53,24 @@ public class ContrachequeDAO {
      * @param data
      * @return 
      */
-    public int conferirGerados(LocalDate data) {
+    public boolean conferirGerados(LocalDate data) {
         EntityManager em = JPA.getEntityManager();
-        int gerado;
+        int quantidade;
+        boolean gerado;
         try {
             Query consulta = em.createQuery("SELECT COUNT(c.id) FROM Competencia c WHERE (MONTH(c.dataCompetencia)) = :mesData AND (YEAR(c.dataCompetencia) = :anoData)");
             consulta.setParameter("mesData", data.getMonth().getValue());
             consulta.setParameter("anoData", data.getYear());
-            gerado = Integer.parseInt(consulta.getSingleResult().toString());
+            quantidade = Integer.parseInt(consulta.getSingleResult().toString());
+            if(quantidade>0){
+                gerado = true;
+            }
+            else{
+                gerado = false;
+            }
             return gerado;
         } catch (NumberFormatException e) {
-            return 0;
+            return false;
         } finally {
             JPA.closeEntity();
         }

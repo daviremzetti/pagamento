@@ -1,11 +1,12 @@
 package Telas;
 
 import DAO.DependenteDAO;
-import br.com.senac.projetointegradordb.ExceptionVazio;
+import Exceptions.ExceptionVazio;
 import br.com.senac.projetointegradordb.Lotacao;
 import br.com.senac.projetointegradordb.Militar;
 import br.com.senac.projetointegradordb.Movimentacao;
 import DAO.MovimentacaoDAO;
+import RegraNegocios.AjudaCustoServicos;
 import br.com.senac.projetointegradordb.StringToLocalDate;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
@@ -556,16 +557,8 @@ public class MovimentacaoCadastrar extends javax.swing.JFrame {
      */
     private void definirAjudaCusto(Militar militar, Movimentacao mov){
         DependenteDAO dao = new DependenteDAO();
-        int qtdDep = dao.contarDependente(militar);
-        
-        if(qtdDep == 0){
-            mov.setPorcentagem((float) 50.00);
-        }else if(qtdDep >0 && qtdDep < 3){
-            mov.setPorcentagem((float) 75.00);
-        }else{
-            mov.setPorcentagem((float) 100.00);
-        }
-        mov.setValor(militar.getPostoGraduacao().getSalario() * mov.getPorcentagem() / 100);
+        AjudaCustoServicos ac = new AjudaCustoServicos();
+        ac.definirAjudaCusto(militar, mov);
     }
     
     

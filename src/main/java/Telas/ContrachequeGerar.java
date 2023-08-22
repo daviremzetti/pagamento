@@ -1,24 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Telas;
 
-import br.com.senac.projetointegradordb.Competencia;
-import DAO.CompetenciaDAO;
 import br.com.senac.projetointegradordb.Contracheque;
-import DAO.ContrachequeDAO;
-import br.com.senac.projetointegradordb.ImpostoRenda;
 import br.com.senac.projetointegradordb.Militar;
 import DAO.MilitarDAO;
-import br.com.senac.projetointegradordb.Movimentacao;
-import DAO.MovimentacaoDAO;
+import RegraNegocios.DescontarPrevidencia;
+import RegraNegocios.ImpostoRendaRetidoFonte;
+import RegraNegocios.AjudaCustoServicos;
+import Servicos.ContrachequeServicos;
 import java.time.LocalDate;
 import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
  * Classe da tela de geração de contracheque
+ *
  * @author daviremzetti
  */
 public class ContrachequeGerar extends javax.swing.JFrame {
@@ -364,39 +359,30 @@ public class ContrachequeGerar extends javax.swing.JFrame {
     }//GEN-LAST:event_SairActionPerformed
 
     private void BtGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGerarActionPerformed
-
         try {
             int mes = this.getMes();
             int ano = Integer.parseInt(TfAno.getText());
             LocalDate data = LocalDate.of(ano, mes, 25);
-            
-            boolean gerado = this.conferirGerados(data);
-            
+            boolean gerado = conferirGerados(data);
             if (gerado == true) {
                 JOptionPane.showMessageDialog(null, "Contracheques para " + mes + "/" + ano + " já foram gerados");
             } else {
-                
                 MilitarDAO daoMil = new MilitarDAO();
-                ContrachequeDAO daoCont = new ContrachequeDAO();
-                
+                ContrachequeServicos servicoContracheque = new ContrachequeServicos();
                 List<Militar> listaMil = daoMil.listar();
                 for (int i = 0; i < listaMil.size(); i++) {
-                    
-                    ImpostoRenda ir = new ImpostoRenda();
                     Militar novoMilitar = listaMil.get(i);
-                    
+                    float subsidio = novoMilitar.getPostoGraduacao().getSalario();
                     Contracheque novoContracheque = new Contracheque();
                     novoContracheque.setDataContracheque(data);
                     novoContracheque.setMilitar(novoMilitar);
-                    novoContracheque.setSubsidio(novoMilitar.getPostoGraduacao().getSalario());
-                    this.pagarAjudaCusto(novoMilitar, novoContracheque);
+                    novoContracheque.setSubsidio(subsidio);
+                    pagarAjudaCusto(novoMilitar, novoContracheque);
                     novoContracheque.setSalarioBruto(novoContracheque.getSubsidio() + novoContracheque.getValorAjudaCusto());
-                    novoContracheque.setIndicePrevidencia((float) 0.10);
-                    novoContracheque.setValorPrevidencia(novoContracheque.getSubsidio() * novoContracheque.getIndicePrevidencia());
-                    this.calcularIr(novoContracheque);
+                    pagarPrevidencia(novoContracheque);
+                    calcularIr(novoContracheque);
                     novoContracheque.setSalarioLiquido(novoContracheque.getSalarioBruto() - novoContracheque.getValorPrevidencia() - novoContracheque.getValorImpostoRenda());
-                    
-                    daoCont.cadastrar(novoContracheque);
+                    servicoContracheque.cadastrar(novoContracheque);
                 }
                 JOptionPane.showMessageDialog(null, "Contracheques para " + data.getMonth().getValue() + "/" + data.getYear() + "gerados com sucesso!");
             }
@@ -404,45 +390,50 @@ public class ContrachequeGerar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Falha na geracào da folha de pagamento");
         }
     }//GEN-LAST:event_BtGerarActionPerformed
-    
-    
+
     /**
-     * Função para conferir se já existe contracheques gerados para a data selecionada pelo usuário
+     * Função para conferir se já existe contracheques gerados para a data
+     * selecionada pelo usuário
+     *
      * @param data
-     * @return 
+     * @return
      */
     private boolean conferirGerados(LocalDate data) {
-        boolean gerado;
-        
-        ContrachequeDAO dao = new ContrachequeDAO();
-        int cont = dao.conferirGerados(data);
-        
-        if (cont > 0) {
-            gerado = true;
-        } else {
-            gerado = false;
-            Competencia compet = new Competencia();
-            compet.setDataCompetencia(data);
-            
-            CompetenciaDAO daoCompet = new CompetenciaDAO();
-            daoCompet.cadastrar(compet);
-            
-        }
+        ContrachequeServicos servicoContracheque = new ContrachequeServicos();
+        boolean gerado = servicoContracheque.conferirGerados(data);
         return gerado;
     }
-    
+
     /**
      * Método para calcular o imposto de renda
-     * @param contracheque 
+     *
+     * @param contracheque
      */
     private void calcularIr(Contracheque contracheque) {
-        ImpostoRenda ir = new ImpostoRenda();
-        ir.setBaseCalculo(contracheque.getSubsidio() - contracheque.getIndicePrevidencia());
-        ir.calcularIr(ir.getBaseCalculo());
-        contracheque.setIndiceImpostoRenda(ir.getAliquota());
-        contracheque.setValorImpostoRenda(ir.getValorImposto());
+        ImpostoRendaRetidoFonte irrf = new ImpostoRendaRetidoFonte();
+        irrf.PagarIr(contracheque);
     }
-    
+
+    private void pagarPrevidencia(Contracheque contracheque) {
+        DescontarPrevidencia pp = new DescontarPrevidencia();
+        pp.descontar(contracheque);
+    }
+
+    private void pagarAjudaCusto(Militar novoMilitar, Contracheque novoContracheque) {
+        AjudaCustoServicos pac = new AjudaCustoServicos();
+        pac.efetuar(novoMilitar, novoContracheque);
+    }
+
+    /**
+     * Função para captar o mês selecionado pelo usuário
+     *
+     * @return
+     */
+    private int getMes() {
+        int mes = CbMes.getSelectedIndex() + 1;
+        return mes;
+    }
+
 
     private void ContGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContGerarActionPerformed
         ContrachequeGerar novoContracheque = new ContrachequeGerar();
@@ -455,33 +446,14 @@ public class ContrachequeGerar extends javax.swing.JFrame {
         this.setVisible(false);
         novaConsulta.setVisible(true);
     }//GEN-LAST:event_ContConsultarActionPerformed
-    
-    /**
-     * Método para pagar ajuda de custo ao militar que foi movimentado e ainda não recebeu ajuda de custo
-     * @param novoMilitar
-     * @param novoContracheque 
-     */
-    private void pagarAjudaCusto(Militar novoMilitar, Contracheque novoContracheque) {
-        MovimentacaoDAO dao = new MovimentacaoDAO();
-        Movimentacao mov = dao.verificarPagamento(novoMilitar);
-        if (mov != null) {
-            novoContracheque.setValorAjudaCusto(mov.getValor());
-            novoContracheque.setIndiceAjudaCusto(mov.getPorcentagem());
-            mov.setPago("SIM");
-            dao.setPagamento(mov);
-        }
-        
-    }
-    
-    /**
-     * Função para captar o mês selecionado pelo usuário
-     * @return 
-     */
-    private int getMes() {
-        int mes = CbMes.getSelectedIndex() + 1;
-        return mes;
-    }
 
+    /**
+     * Método para pagar ajuda de custo ao militar que foi movimentado e ainda
+     * não recebeu ajuda de custo
+     *
+     * @param novoMilitar
+     * @param novoContracheque
+     */
     /**
      * @param args the command line arguments
      */
