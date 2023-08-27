@@ -2,6 +2,7 @@ package Telas;
 
 import br.com.senac.projetointegradordb.Lotacao;
 import DAO.LotacaoDAO;
+import Servicos.LotacaoServicos;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -10,6 +11,8 @@ import javax.swing.table.DefaultTableModel;
  * @author biancamarques
  */
 public class LotacaoConsultar extends javax.swing.JFrame {
+    
+    private LotacaoServicos servicoLot = new LotacaoServicos();
 
     public LotacaoConsultar() {
         initComponents();
@@ -426,7 +429,7 @@ public class LotacaoConsultar extends javax.swing.JFrame {
     }//GEN-LAST:event_TfPelotaoKeyReleased
 
     private void ConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarActionPerformed
-        LotacaoDAO dao = new LotacaoDAO();
+
         List<Lotacao>lista;
         
         String batalhao = TfBatalhao.getText();
@@ -435,9 +438,9 @@ public class LotacaoConsultar extends javax.swing.JFrame {
         
         boolean listarTodos = this.listarTodos(batalhao, companhia, pelotao);
         if(listarTodos == true) {
-            lista = dao.listar();
+            lista = servicoLot.listar();
         }else{
-            lista = dao.filtrar(TfBatalhao.getText(), TfCompanhia.getText(),TfPelotao.getText());
+            lista = servicoLot.filtrar(TfBatalhao.getText(), TfCompanhia.getText(),TfPelotao.getText());
         }
         listar(lista);
     }//GEN-LAST:event_ConsultarActionPerformed

@@ -1,64 +1,69 @@
 package Telas;
 
-import DAO.DependenteDAO;
 import Exceptions.ExceptionVazio;
 import br.com.senac.projetointegradordb.Lotacao;
 import br.com.senac.projetointegradordb.Militar;
 import br.com.senac.projetointegradordb.Movimentacao;
-import DAO.MovimentacaoDAO;
-import RegraNegocios.AjudaCustoServicos;
-import br.com.senac.projetointegradordb.StringToLocalDate;
+import Formatacoes.StringToLocalDate;
+import Servicos.MovimentacaoServicos;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
 /**
  * Classe de cadastro de movimentações
+ *
  * @author biancamarques
  */
 public class MovimentacaoCadastrar extends javax.swing.JFrame {
-    
+
     private Militar militar;
     private Lotacao destino;
-    
-    public void setDestino(Lotacao destino){
+
+    public void setDestino(Lotacao destino) {
         this.destino = destino;
     }
-    
-    public Lotacao gerDestino(){
+
+    public Lotacao gerDestino() {
         return destino;
     }
-    
-    public void setMilitar(Militar militar){
+
+    public void setMilitar(Militar militar) {
         this.militar = militar;
     }
-    
-    public Militar getMilitar(){
+
+    public Militar getMilitar() {
         return militar;
     }
-    
+
     public MovimentacaoCadastrar() {
         initComponents();
     }
-    
+
     /**
-     * Método para preencher o nome do militar selecionado na tela MilitarConsultarPara
-     * @param nome 
+     * Método para preencher o nome do militar selecionado na tela
+     * MilitarConsultarPara
+     *
+     * @param nome
      */
     public void setNomeMilitar(String nome) {
         TfNome.setText(nome);
     }
-    
+
     /**
-     * Método para preencher o nome da lotação selecionada na tela LotacaoConsultarPara
-     * @param nome 
+     * Método para preencher o nome da lotação selecionada na tela
+     * LotacaoConsultarPara
+     *
+     * @param nome
      */
     public void setNomeLotacao(String nome) {
         TfDestino.setText(nome);
     }
-    
+
     /**
-     * Método para preencher o nome do matricula selecionado na tela MilitarConsultarPara
-     * @param matricula 
+     * Método para preencher o nome do matricula selecionado na tela
+     * MilitarConsultarPara
+     *
+     * @param matricula
      */
     public void setMatriculaMil(String matricula) {
         TfMatricula.setText(matricula);
@@ -518,50 +523,52 @@ public class MovimentacaoCadastrar extends javax.swing.JFrame {
     private void BtCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadastrarActionPerformed
 
         try {
-            this.conferirCampos();
-            
+            conferirCampos();
             Movimentacao novaMovimentacao = new Movimentacao();
             novaMovimentacao.setMilitar(militar);
-            
             String dataDigitada = TfData.getText();
-            StringToLocalDate conversor = new StringToLocalDate();
-            LocalDate data = conversor.converterString(dataDigitada);
+            LocalDate data = StringToLocalDate.converter(dataDigitada);
             novaMovimentacao.setData_Mov(data);
             novaMovimentacao.setOrigem(militar.getLotacao());
             novaMovimentacao.setDestino(destino);
-            definirAjudaCusto(militar,novaMovimentacao);
-
-            MovimentacaoDAO dao = new MovimentacaoDAO();
-            boolean cadastrado = dao.cadastrar(novaMovimentacao);
-            
-            if(cadastrado == true){
+            novaMovimentacao.setPorcentagem();
+            novaMovimentacao.setValor();
+            MovimentacaoServicos servicoMov = new MovimentacaoServicos();
+            boolean cadastrado = servicoMov.cadastrar(novaMovimentacao);
+            if (cadastrado == true) {
                 JOptionPane.showMessageDialog(null, "Movimentacao cadastrada com sucesso!");
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Falha no cadastro da movimentação");
             }
-            
-
-            TfData.setText("");
-            TfNome.setText("");
-            TfMatricula.setText("");
-            TfDestino.setText("");
-        } catch(ExceptionVazio e){
+            limparCampos();
+        } catch (ExceptionVazio e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_BtCadastrarActionPerformed
-    
-    /**
-     * Método para definir o valor da ajuda de custo
-     * @param militar
-     * @param mov 
-     */
-    private void definirAjudaCusto(Militar militar, Movimentacao mov){
-        DependenteDAO dao = new DependenteDAO();
-        AjudaCustoServicos ac = new AjudaCustoServicos();
-        ac.definirAjudaCusto(militar, mov);
+
+
+    private void limparCampos() {
+        TfData.setText("");
+        TfNome.setText("");
+        TfMatricula.setText("");
+        TfDestino.setText("");
     }
-    
-    
+
+    /**
+     * Método para verificar se há campos não preenchidos pelo usuário
+     *
+     * @throws ExceptionVazio
+     */
+    private void conferirCampos() throws ExceptionVazio {
+        String nome = TfNome.getText();
+        String destino = TfDestino.getText();
+        String data = TfData.getText();
+        if (nome.isEmpty() || destino.isEmpty() || data.equals("  /  /    ")) {
+            throw new ExceptionVazio();
+        }
+    }
+
+
     private void ContGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContGerarActionPerformed
         ContrachequeGerar novoContracheque = new ContrachequeGerar();
         this.setVisible(false);
@@ -573,19 +580,6 @@ public class MovimentacaoCadastrar extends javax.swing.JFrame {
         this.setVisible(false);
         novaConsulta.setVisible(true);
     }//GEN-LAST:event_ContConsultarActionPerformed
-    
-    /**
-     * Método para verificar se há campos não preenchidos pelo usuário
-     * @throws ExceptionVazio 
-     */
-    private void conferirCampos() throws ExceptionVazio {
-        String nome = TfNome.getText();
-        String destino = TfDestino.getText();
-        String data = TfData.getText();
-        if (nome.isEmpty() || destino.isEmpty() || data.equals("  /  /    ")) {
-            throw new ExceptionVazio();
-        }
-    }
 
     public static void main(String args[]) {
 

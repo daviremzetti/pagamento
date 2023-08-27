@@ -13,8 +13,9 @@ import java.util.List;
  */
 public class ContrachequeServicos {
     
+    private static final ContrachequeDAO dao = DAO.getContrachequeDAO();
+    
     public boolean cadastrar(Contracheque contracheque) {
-       ContrachequeDAO dao = DAO.getContrachequeDAO();
        return dao.cadastrar(contracheque);
     }
     
@@ -23,7 +24,6 @@ public class ContrachequeServicos {
      * @return 
      */
     public List<Contracheque> listar() {
-        ContrachequeDAO dao = DAO.getContrachequeDAO();
         return dao.listar();
     }
     
@@ -33,7 +33,6 @@ public class ContrachequeServicos {
      * @return 
      */
     public boolean conferirGerados(LocalDate data) {
-        ContrachequeDAO dao = DAO.getContrachequeDAO();
         return dao.conferirGerados(data);
     }
     
@@ -44,7 +43,6 @@ public class ContrachequeServicos {
      * @return 
      */
     public Contracheque consultar(String matricula, LocalDate data) {
-        ContrachequeDAO dao = DAO.getContrachequeDAO();
         return dao.consultar(matricula, data); 
     }
 }

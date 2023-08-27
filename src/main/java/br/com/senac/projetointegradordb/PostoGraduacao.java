@@ -44,5 +44,4 @@ public class PostoGraduacao {
     public void setSalario(float salario) {
         this.salario = salario;
     }
-
 }

@@ -3,8 +3,10 @@ package Telas;
 
 import br.com.senac.projetointegradordb.Movimentacao;
 import DAO.MovimentacaoDAO;
+import Servicos.MovimentacaoServicos;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+
 public class MovimentacaoConsultar extends javax.swing.JFrame {
     
     /**
@@ -363,27 +365,23 @@ public class MovimentacaoConsultar extends javax.swing.JFrame {
     }//GEN-LAST:event_SairActionPerformed
 
     private void ConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarActionPerformed
-        MovimentacaoDAO dao = new MovimentacaoDAO();
+        MovimentacaoServicos servicoMov = new MovimentacaoServicos();
         List <Movimentacao> lista;
-        
         boolean listarTodos = this.listarTodos();
-        
         if(listarTodos == true){
-            lista = dao.listar();
+            lista = servicoMov.listar();
         }else{
-            lista = dao.filtrar(TfNome.getText(), TfMatricula.getText());
+            lista = servicoMov.filtrar(TfNome.getText(), TfMatricula.getText());
         }
         listar(lista);
         TfMatricula.setText("");
         TfNome.setText("");
     }//GEN-LAST:event_ConsultarActionPerformed
-    
-    
+      
     private boolean listarTodos(){
         String matriculaDigitada = TfMatricula.getText();
         String nomeDigitado = TfNome.getText();
         boolean listar;
-        
         if(matriculaDigitada.equals("   .   - ") && nomeDigitado.isEmpty()){
             listar = true;
         }else{

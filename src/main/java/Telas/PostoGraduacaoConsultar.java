@@ -1,9 +1,8 @@
 package Telas;
 
 import br.com.senac.projetointegradordb.PostoGraduacao;
-import DAO.PostoGraduacaoDAO;
+import Servicos.PostoGraduacaoServicos;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -343,18 +342,13 @@ public class PostoGraduacaoConsultar extends javax.swing.JFrame {
 
     private void ConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarActionPerformed
         List <PostoGraduacao> lista;
-        
         String filtro = TfNome.getText();
         boolean filtroVazio = TfNome.getText().isEmpty();
-        
-        DefaultTableModel tabelaModelo = (DefaultTableModel) TbLista.getModel();
-        tabelaModelo.setNumRows(0);
-       
-        PostoGraduacaoDAO dao = new PostoGraduacaoDAO();
+        PostoGraduacaoServicos postGradServico = new PostoGraduacaoServicos();
         if (filtroVazio) {
-            lista = dao.listar();
+            lista = postGradServico.listar();
         } else {
-            lista = dao.buscaNome(filtro);
+            lista = postGradServico.buscaNome(filtro);
         }
         listar(lista);
         TfNome.setText("");

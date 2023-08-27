@@ -2,6 +2,7 @@ package Telas;
 
 import br.com.senac.projetointegradordb.Militar;
 import DAO.MilitarDAO;
+import Servicos.MilitarServicos;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -417,19 +418,17 @@ public class MilitarConsultarPara extends javax.swing.JFrame {
         String cpfDigitado = TfCpf.getText();
         String nomeDigitado = TfNome.getText().toUpperCase();
 
-        MilitarDAO dao = new MilitarDAO();
+        MilitarServicos servicoMil = new MilitarServicos();
         List<Militar> lista;
 
         if (matriculaDigitada.equals("   .   - ") && cpfDigitado.equals("   .   .   -  ") && nomeDigitado.isEmpty()) {
-            lista = dao.listar();
+            lista = servicoMil.listar();
         } else {
-            lista = dao.buscaFiltro(nomeDigitado, matriculaDigitada, cpfDigitado);
+            lista = servicoMil.buscaFiltro(nomeDigitado, matriculaDigitada, cpfDigitado);
         }
 
         listar(lista);
-        TfMatricula.setText("");
-        TfCpf.setText("");
-        TfNome.setText("");
+        limparCampos();
     }//GEN-LAST:event_ListarActionPerformed
 
     /**
@@ -456,6 +455,12 @@ public class MilitarConsultarPara extends javax.swing.JFrame {
             TbLista.setModel(tabelaModelo);
         }
 
+    }
+
+    private void limparCampos() {
+        TfMatricula.setText("");
+        TfCpf.setText("");
+        TfNome.setText("");
     }
 
     /**
@@ -497,8 +502,7 @@ public class MilitarConsultarPara extends javax.swing.JFrame {
         }
     }
 
-   
-   
+
     private void SelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelecionarActionPerformed
         selecionar();
         this.setVisible(false);

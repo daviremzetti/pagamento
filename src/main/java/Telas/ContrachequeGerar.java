@@ -2,11 +2,8 @@ package Telas;
 
 import br.com.senac.projetointegradordb.Contracheque;
 import br.com.senac.projetointegradordb.Militar;
-import DAO.MilitarDAO;
-import RegraNegocios.DescontarPrevidencia;
-import RegraNegocios.ImpostoRendaRetidoFonte;
-import RegraNegocios.AjudaCustoServicos;
 import Servicos.ContrachequeServicos;
+import Servicos.MilitarServicos;
 import java.time.LocalDate;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -17,6 +14,9 @@ import javax.swing.JOptionPane;
  * @author daviremzetti
  */
 public class ContrachequeGerar extends javax.swing.JFrame {
+
+    private ContrachequeServicos servicoContracheque = new ContrachequeServicos();
+    private MilitarServicos militarServico = new MilitarServicos();
 
     /**
      * Creates new form ContrachequeGerar
@@ -367,29 +367,32 @@ public class ContrachequeGerar extends javax.swing.JFrame {
             if (gerado == true) {
                 JOptionPane.showMessageDialog(null, "Contracheques para " + mes + "/" + ano + " já foram gerados");
             } else {
-                MilitarDAO daoMil = new MilitarDAO();
-                ContrachequeServicos servicoContracheque = new ContrachequeServicos();
-                List<Militar> listaMil = daoMil.listar();
-                for (int i = 0; i < listaMil.size(); i++) {
-                    Militar novoMilitar = listaMil.get(i);
-                    float subsidio = novoMilitar.getPostoGraduacao().getSalario();
-                    Contracheque novoContracheque = new Contracheque();
-                    novoContracheque.setDataContracheque(data);
-                    novoContracheque.setMilitar(novoMilitar);
-                    novoContracheque.setSubsidio(subsidio);
-                    pagarAjudaCusto(novoMilitar, novoContracheque);
-                    novoContracheque.setSalarioBruto(novoContracheque.getSubsidio() + novoContracheque.getValorAjudaCusto());
-                    pagarPrevidencia(novoContracheque);
-                    calcularIr(novoContracheque);
-                    novoContracheque.setSalarioLiquido(novoContracheque.getSalarioBruto() - novoContracheque.getValorPrevidencia() - novoContracheque.getValorImpostoRenda());
-                    servicoContracheque.cadastrar(novoContracheque);
-                }
-                JOptionPane.showMessageDialog(null, "Contracheques para " + data.getMonth().getValue() + "/" + data.getYear() + "gerados com sucesso!");
+                List<Militar> listaMil = militarServico.listar();
+                gerarContracheques(listaMil, data);
+                JOptionPane.showMessageDialog(null, "Contracheques para " + data.getMonth().getValue() + "/" + data.getYear() + " gerados com sucesso!");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Falha na geracào da folha de pagamento");
+            JOptionPane.showMessageDialog(null, "Falha na geracão da folha de pagamento");
         }
     }//GEN-LAST:event_BtGerarActionPerformed
+
+    
+    private void gerarContracheques(List lista, LocalDate data) {
+        for (int i = 0; i < lista.size(); i++) {
+            Militar novoMilitar = (Militar) lista.get(i);
+            float subsidio = novoMilitar.getPostoGraduacao().getSalario();
+            Contracheque novoContracheque = new Contracheque();
+            novoContracheque.setDataContracheque(data);
+            novoContracheque.setMilitar(novoMilitar);
+            novoContracheque.setSubsidio(subsidio);
+            novoContracheque.setAjudaCusto();
+            novoContracheque.setSalarioBruto();
+            novoContracheque.setPrevidencia();
+            novoContracheque.setImpostoRenda();
+            novoContracheque.setSalarioLiquido();
+            servicoContracheque.cadastrar(novoContracheque);
+        }
+    }
 
     /**
      * Função para conferir se já existe contracheques gerados para a data
@@ -399,29 +402,8 @@ public class ContrachequeGerar extends javax.swing.JFrame {
      * @return
      */
     private boolean conferirGerados(LocalDate data) {
-        ContrachequeServicos servicoContracheque = new ContrachequeServicos();
         boolean gerado = servicoContracheque.conferirGerados(data);
         return gerado;
-    }
-
-    /**
-     * Método para calcular o imposto de renda
-     *
-     * @param contracheque
-     */
-    private void calcularIr(Contracheque contracheque) {
-        ImpostoRendaRetidoFonte irrf = new ImpostoRendaRetidoFonte();
-        irrf.PagarIr(contracheque);
-    }
-
-    private void pagarPrevidencia(Contracheque contracheque) {
-        DescontarPrevidencia pp = new DescontarPrevidencia();
-        pp.descontar(contracheque);
-    }
-
-    private void pagarAjudaCusto(Militar novoMilitar, Contracheque novoContracheque) {
-        AjudaCustoServicos pac = new AjudaCustoServicos();
-        pac.efetuar(novoMilitar, novoContracheque);
     }
 
     /**

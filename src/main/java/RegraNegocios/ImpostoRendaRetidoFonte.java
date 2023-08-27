@@ -9,21 +9,14 @@ import br.com.senac.projetointegradordb.Contracheque;
  */
 public class ImpostoRendaRetidoFonte {
     
+    private float baseCalculo;
     private float aliquota;
     private float deducao;
     private float valorImposto;
     
     
-    public void PagarIr(Contracheque contracheque) {
-        float baseCalculo = contracheque.getSubsidio() - contracheque.getValorPrevidencia();
-        calcularIr(baseCalculo);
-        contracheque.setIndiceImpostoRenda(aliquota);
-        contracheque.setValorImpostoRenda(valorImposto);
-    }
-    
-    
-    public void calcularIr(float baseCalculo) {
-        
+    public float pagar(Contracheque contracheque) {
+        baseCalculo = contracheque.getSubsidio() - contracheque.getValorPrevidencia();
         boolean primeiraFaixa = baseCalculo <= 2112.00;
         boolean segundaFaixa = baseCalculo > 2112.00 && baseCalculo <= 2826.65;
         boolean terceiraFaixa = baseCalculo > 2826.65 && baseCalculo <= 3751.05;
@@ -48,6 +41,11 @@ public class ImpostoRendaRetidoFonte {
             deducao = (float) 884.96;
         }  
         valorImposto = (baseCalculo * aliquota/100) - deducao;
+        return valorImposto;
+    }
+    
+    public float getAliquota(){
+        return aliquota;
     }
     
 }

@@ -1,6 +1,9 @@
 
 package br.com.senac.projetointegradordb;
 
+import RegraNegocios.AjudaCustoLancarContracheque;
+import RegraNegocios.ImpostoRendaRetidoFonte;
+import RegraNegocios.Previdencia;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -91,10 +94,6 @@ public class Contracheque {
         return salarioLiquido;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setMilitar(Militar militar) {
         this.militar = militar;
     }
@@ -107,36 +106,28 @@ public class Contracheque {
         this.subsidio = subsidio;
     }
 
-    public void setIndiceAjudaCusto(float indiceAjudaCusto) {
-        this.indiceAjudaCusto = indiceAjudaCusto;
+    public void setAjudaCusto() {
+        this.indiceAjudaCusto = AjudaCustoLancarContracheque.aliquota(militar, this);
+        this.valorAjudaCusto = AjudaCustoLancarContracheque.valor(militar, this);
     }
 
-    public void setValorAjudaCusto(float valorAjudaCusto) {
-        this.valorAjudaCusto = valorAjudaCusto;
+    public void setSalarioBruto() {
+        this.salarioBruto = subsidio + valorAjudaCusto;
     }
 
-    public void setSalarioBruto(float salarioBruto) {
-        this.salarioBruto = salarioBruto;
+    public void setPrevidencia() {
+        this.indicePrevidencia = Previdencia.getAliquota();
+        this.valorPrevidencia = Previdencia.descontar(this);
     }
 
-    public void setIndicePrevidencia(float indicePrevidencia) {
-        this.indicePrevidencia = indicePrevidencia;
+    public void setImpostoRenda() {
+        ImpostoRendaRetidoFonte irrf = new ImpostoRendaRetidoFonte();
+        this.valorImpostoRenda = irrf.pagar(this);
+        this.indiceImpostoRenda = irrf.getAliquota();
     }
 
-    public void setValorPrevidencia(float valorPrevidencia) {
-        this.valorPrevidencia = valorPrevidencia;
-    }
-
-    public void setIndiceImpostoRenda(float indiceImpostoRenda) {
-        this.indiceImpostoRenda = indiceImpostoRenda;
-    }
-
-    public void setValorImpostoRenda(float valorImpostoRenda) {
-        this.valorImpostoRenda = valorImpostoRenda;
-    }
-
-    public void setSalarioLiquido(float salarioLiquido) {
-        this.salarioLiquido = salarioLiquido;
+    public void setSalarioLiquido() {
+        this.salarioLiquido = salarioBruto - valorPrevidencia - valorImpostoRenda;
     }
 
 }

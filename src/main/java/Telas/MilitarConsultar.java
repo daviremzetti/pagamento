@@ -2,11 +2,14 @@ package Telas;
 
 import br.com.senac.projetointegradordb.Militar;
 import DAO.MilitarDAO;
+import Servicos.MilitarServicos;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
  * Classe da tela de consulta de militar
+ *
  * @author daviremzetti
  */
 public class MilitarConsultar extends javax.swing.JFrame {
@@ -386,59 +389,42 @@ public class MilitarConsultar extends javax.swing.JFrame {
     }//GEN-LAST:event_SairActionPerformed
 
     private void ListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarActionPerformed
-        
+
         String matricula = TfMatricula.getText();
         String cpf = TfCpf.getText();
         String nome = TfNome.getText();
-        
-        boolean listarTodos = this.listarTodos(matricula, cpf, nome);
-
+        List<Militar> lista;
+        MilitarServicos servicoMil = new MilitarServicos();
+        boolean listarTodos = listarTodos(matricula, cpf, nome);
         if (listarTodos == true) {
-            listarMilitar();
+            lista = servicoMil.listar();
         } else {
-            this.filtrar(nome,matricula,cpf);
+            lista = servicoMil.buscaFiltro(nome, matricula, cpf);
         }
-
-        TfMatricula.setText("");
-        TfCpf.setText("");
-        TfNome.setText("");
+        listar(lista);
+        limparCampos();
     }//GEN-LAST:event_ListarActionPerformed
-    
-    private boolean listarTodos(String matricula, String cpf, String nome){
-      
+
+    private boolean listarTodos(String matricula, String cpf, String nome) {
+
         boolean listar;
         if (matricula.equals("   .   - ") && cpf.equals("   .   .   -  ") && nome.isEmpty()) {
             listar = true;
         } else {
             listar = false;
         }
-        
         return listar;
     }
-    private void ContGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContGerarActionPerformed
-        ContrachequeGerar novoContracheque = new ContrachequeGerar();
-        this.setVisible(false);
-        novoContracheque.setVisible(true);
-    }//GEN-LAST:event_ContGerarActionPerformed
 
-    private void ContConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContConsultarActionPerformed
-        ContrachequeConsultar novaConsulta = new ContrachequeConsultar();
-        this.setVisible(false);
-        novaConsulta.setVisible(true);
-    }//GEN-LAST:event_ContConsultarActionPerformed
-    
     /**
      * Método para listar todos os militares em tela
      */
-    private void listarMilitar() {
+    private void listar(List lista) {
         DefaultTableModel tabelaModelo = (DefaultTableModel) TbLista.getModel();
         tabelaModelo.setNumRows(0);
 
-        MilitarDAO dao = new MilitarDAO();
-        List<Militar> lista = dao.listar();
-
         for (int i = 0; i < lista.size(); i++) {
-            Militar novoMilitar = lista.get(i);
+            Militar novoMilitar = (Militar) lista.get(i);
 
             String id = String.valueOf(novoMilitar.getId());
             String matricula = novoMilitar.getMatricula();
@@ -453,36 +439,30 @@ public class MilitarConsultar extends javax.swing.JFrame {
             TbLista.setModel(tabelaModelo);
         }
     }
-    
+
     /**
      * Método para selecionar militares por nome, matrícula ou cpf
+     *
      * @param nome
      * @param matricula
-     * @param cpf 
+     * @param cpf
      */
-    private void filtrar(String nome, String matricula, String cpf) {
-        DefaultTableModel tabelaModelo = (DefaultTableModel) TbLista.getModel();
-        tabelaModelo.setNumRows(0);
-
-        MilitarDAO dao = new MilitarDAO();
-        List<Militar> lista = dao.buscaFiltro(nome, matricula, cpf);
-
-        for (int i = 0; i < lista.size(); i++) {
-            Militar novoMilitar = lista.get(i);
-
-            String id = String.valueOf(novoMilitar.getId());
-            String matriculaMilitar = novoMilitar.getMatricula();
-            String nomeMilitar = novoMilitar.getNome().toUpperCase();
-            String posto = novoMilitar.getPostoGraduacao().getPosto_graduacao().toUpperCase();
-            String lotacao = novoMilitar.getLotacao().getNome().toUpperCase();
-
-            String[] linha = {
-                id, matriculaMilitar, nomeMilitar, posto, lotacao
-            };
-            tabelaModelo.addRow(linha);
-            TbLista.setModel(tabelaModelo);
-        }
+    private void limparCampos() {
+        TfMatricula.setText("");
+        TfCpf.setText("");
+        TfNome.setText("");
     }
+    private void ContGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContGerarActionPerformed
+        ContrachequeGerar novoContracheque = new ContrachequeGerar();
+        this.setVisible(false);
+        novoContracheque.setVisible(true);
+    }//GEN-LAST:event_ContGerarActionPerformed
+
+    private void ContConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContConsultarActionPerformed
+        ContrachequeConsultar novaConsulta = new ContrachequeConsultar();
+        this.setVisible(false);
+        novaConsulta.setVisible(true);
+    }//GEN-LAST:event_ContConsultarActionPerformed
 
     public static void main(String args[]) {
 

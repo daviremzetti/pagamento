@@ -1,7 +1,7 @@
 package Telas;
 
 import br.com.senac.projetointegradordb.Lotacao;
-import DAO.LotacaoDAO;
+import Servicos.LotacaoServicos;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 public class LotacaoConsultarPara extends javax.swing.JFrame {
 
     private MovimentacaoCadastrar cadastroMov;
+    private LotacaoServicos servicoLot = new LotacaoServicos();
 
     public LotacaoConsultarPara() {
         initComponents();
@@ -224,26 +225,23 @@ public class LotacaoConsultarPara extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void ConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarActionPerformed
-        LotacaoDAO dao = new LotacaoDAO();
+
         List<Lotacao>lista;
-        
         String batalhao = TfBatalhao.getText();
         String companhia = TfCompanhia.getText();
         String pelotao = TfPelotao.getText();
         
-        boolean listarTodos = this.listarTodos(batalhao, companhia, pelotao);
+        boolean listarTodos = listarTodos(batalhao, companhia, pelotao);
         if(listarTodos == true) {
-            lista = dao.listar();
+            lista = servicoLot.listar();
         }else{
-            lista = dao.filtrar(TfBatalhao.getText(), TfCompanhia.getText(),TfPelotao.getText());
+            lista = servicoLot.filtrar(TfBatalhao.getText(), TfCompanhia.getText(),TfPelotao.getText());
         }
         listar(lista);
     }//GEN-LAST:event_ConsultarActionPerformed
     
     private boolean listarTodos(String batalhao, String companhia, String pelotao){
-        
         boolean listar;
-        
         if(batalhao.isEmpty() && companhia.isEmpty() && pelotao.isEmpty()){
             listar = true;
         }else{
@@ -288,10 +286,7 @@ public class LotacaoConsultarPara extends javax.swing.JFrame {
         try {
             int linhaSelecionada = TbLista.getSelectedRow();
             int idSelecionado = Integer.parseInt((String) TbLista.getValueAt(linhaSelecionada, 0));
-            
-            LotacaoDAO dao = new LotacaoDAO();
-            Lotacao lot = dao.buscaId(idSelecionado);
-
+            Lotacao lot = servicoLot.buscaId(idSelecionado);
             cadastroMov.setDestino(lot);
             cadastroMov.setNomeLotacao(lot.getNome());
         } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {

@@ -28,12 +28,4 @@ public class RelacaoDependencia {
         return nomeRelacao;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setNomeRelacao(String nomeRelacao) {
-        this.nomeRelacao = nomeRelacao;
-    }
-
 }

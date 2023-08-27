@@ -2,17 +2,20 @@ package Telas;
 
 import br.com.senac.projetointegradordb.Dependente;
 import DAO.DependenteDAO;
+import Servicos.DependenteServicos;
 import br.com.senac.projetointegradordb.Militar;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
  * Classe da tela de consulta de dependente
+ *
  * @author daviremzetti
  */
 public class DependenteConsultar extends javax.swing.JFrame {
 
-    Militar militar;
+    private Militar militar;
+    private DependenteServicos servicoDep = new DependenteServicos();
 
     public DependenteConsultar() {
         initComponents();
@@ -25,16 +28,18 @@ public class DependenteConsultar extends javax.swing.JFrame {
     public Militar getMilitar() {
         return militar;
     }
-    
+
     /**
-     * Método para preencher nome do militar selecionado na tela MilitarConsultarPara
+     * Método para preencher nome do militar selecionado na tela
+     * MilitarConsultarPara
      */
     public void setNomeMantenedor() {
         TfNomeMant.setText(militar.getNome());
     }
-    
+
     /**
-     * Método para preencher matrícula do militar selecionado na tela MilitarConsultarPara
+     * Método para preencher matrícula do militar selecionado na tela
+     * MilitarConsultarPara
      */
     public void setMatriculaMantenedor() {
         TfMatricula.setText(militar.getMatricula());
@@ -486,18 +491,17 @@ public class DependenteConsultar extends javax.swing.JFrame {
     }//GEN-LAST:event_ConsultarMilActionPerformed
 
     private void ConsultarDepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarDepActionPerformed
-        
-        if(TfNome.getText().isEmpty() && TfCpf.getText().equals("   .   .   -  ") & TfNomeMant.getText().isEmpty()){
-            this.listar();
+        List<Dependente> lista;
+        String nomeDep = TfNome.getText();
+        String cpfDep = TfCpf.getText();
+        String matriculaMant = TfMatricula.getText();
+        if (TfNome.getText().isEmpty() && TfCpf.getText().equals("   .   .   -  ") & TfNomeMant.getText().isEmpty()) {
+            lista = servicoDep.listar();
+        } else {
+            lista = servicoDep.filtrar(nomeDep, cpfDep, matriculaMant);
         }
-        else{
-            this.filtrar(TfNome.getText(), TfCpf.getText(), TfMatricula.getText());
-        }
-        
-        TfNome.setText("");
-        TfCpf.setText("");
-        TfNomeMant.setText("");
-        TfMatricula.setText("");
+        listar(lista);
+        limparCampos();
     }//GEN-LAST:event_ConsultarDepActionPerformed
 
     private void TfNomeMantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TfNomeMantActionPerformed
@@ -515,62 +519,35 @@ public class DependenteConsultar extends javax.swing.JFrame {
         this.setVisible(false);
         novaConsulta.setVisible(true);
     }//GEN-LAST:event_ContConsultarActionPerformed
-    
+
     /**
      * Método para listar todos os dependentes em tela
      */
-    private void listar() {
+    private void listar(List lista) {
         DefaultTableModel tabelaModelo = (DefaultTableModel) TbLista.getModel();
         tabelaModelo.setNumRows(0);
 
-        DependenteDAO dao = new DependenteDAO();
-        List<Dependente> lista = dao.listar();
-
         for (int i = 0; i < lista.size(); i++) {
-            Dependente novoDep = lista.get(i);
+            Dependente novoDep = (Dependente) lista.get(i);
             String id = String.valueOf(novoDep.getId());
             String nome = novoDep.getNome().toUpperCase();
             String cpf = novoDep.getCpf().toUpperCase();
             String parentesco = novoDep.getRelacaoDependencia().getNomeRelacao().toUpperCase();
             String mantenedor = novoDep.getMilitar().getNome().toUpperCase();
-
             String[] linha = {
                 id, nome, cpf, parentesco, mantenedor
             };
             tabelaModelo.addRow(linha);
             TbLista.setModel(tabelaModelo);
-
         }
     }
-    
-    /**
-     * Método para selecionar dependete por nome, cpf ou mantenedor
-     * @param nomeDep
-     * @param cpfDep
-     * @param matriculaMant 
-     */
-    private void filtrar(String nomeDep, String cpfDep, String matriculaMant) {
-        DefaultTableModel tabelaModelo = (DefaultTableModel) TbLista.getModel();
-        tabelaModelo.setNumRows(0);
 
-        DependenteDAO dao = new DependenteDAO();
-        List<Dependente> lista = dao.filtrar(nomeDep, cpfDep, matriculaMant);
+    private void limparCampos() {
+        TfNome.setText("");
+        TfCpf.setText("");
+        TfNomeMant.setText("");
+        TfMatricula.setText("");
 
-        for (int i = 0; i < lista.size(); i++) {
-            Dependente novoDep = lista.get(i);
-            String id = String.valueOf(novoDep.getId());
-            String nome = novoDep.getNome().toUpperCase();
-            String cpf = novoDep.getCpf();
-            String parentesco = novoDep.getRelacaoDependencia().getNomeRelacao().toUpperCase();
-            String mantenedor = novoDep.getMilitar().getNome().toUpperCase();
-
-            String[] linha = {
-                id, nome, cpf, parentesco, mantenedor
-            };
-            tabelaModelo.addRow(linha);
-            TbLista.setModel(tabelaModelo);
-
-        }
     }
 
     public static void main(String args[]) {

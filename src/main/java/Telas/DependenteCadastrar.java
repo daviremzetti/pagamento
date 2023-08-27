@@ -1,7 +1,6 @@
 package Telas;
 
 import br.com.senac.projetointegradordb.Dependente;
-import DAO.DependenteDAO;
 import br.com.senac.projetointegradordb.Endereco;
 import Exceptions.ExceptionVazio;
 import br.com.senac.projetointegradordb.Militar;
@@ -24,7 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class DependenteCadastrar extends javax.swing.JFrame {
 
-    protected Militar militar;
+    private Militar militar;
     private String endereco;
 
     public void setMilitar(Militar militar) {

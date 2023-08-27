@@ -2,7 +2,7 @@ package Telas;
 
 import Exceptions.ExceptionVazio;
 import br.com.senac.projetointegradordb.PostoGraduacao;
-import DAO.PostoGraduacaoDAO;
+import Servicos.PostoGraduacaoServicos;
 import javax.swing.JOptionPane;
 
 /**
@@ -296,8 +296,8 @@ public class PostoGraduacaoCadastrar extends javax.swing.JFrame {
             novoPosto.setPosto_graduacao(posto);
             novoPosto.setSalario(salario);
 
-            PostoGraduacaoDAO dao = new PostoGraduacaoDAO();
-            boolean cadastrado = dao.cadastrar(novoPosto);
+            PostoGraduacaoServicos postGradServico = new PostoGraduacaoServicos();
+            boolean cadastrado = postGradServico.cadastrar(novoPosto);
             if(cadastrado == true){
                 JOptionPane.showMessageDialog(null, "Posto/Graduação cadastrado com sucesso!");
             }else{

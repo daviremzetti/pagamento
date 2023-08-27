@@ -4,13 +4,17 @@ import Exceptions.ExceptionBatalhaoVazio;
 import Exceptions.ExceptionLotacao;
 import br.com.senac.projetointegradordb.Lotacao;
 import DAO.LotacaoDAO;
+import Servicos.LotacaoServicos;
 import javax.swing.JOptionPane;
 
 /**
  * Classe da tela de cadastro de lotação
+ *
  * @author biancamarques
  */
 public class LotacaoCadastrar extends javax.swing.JFrame {
+
+    private LotacaoServicos servicoLot = new LotacaoServicos();
 
     public LotacaoCadastrar() {
         initComponents();
@@ -364,8 +368,8 @@ public class LotacaoCadastrar extends javax.swing.JFrame {
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
 
         try {
-            this.conferirBatalhao();
-            this.conferirPreenchimento();
+            conferirBatalhao();
+            conferirPreenchimento();
             String batalhao = TfBatalhao.getText();
             String companhia = TfCompanhia.getText();
             String pelotao = TfPelotao.getText();
@@ -377,30 +381,27 @@ public class LotacaoCadastrar extends javax.swing.JFrame {
             novaLotacao.setPelotao(pelotao);
             novaLotacao.setNome(nome);
 
-            LotacaoDAO dao = new LotacaoDAO();
-            boolean cadastrado = dao.cadastrar(novaLotacao);
+            boolean cadastrado = servicoLot.cadastrar(novaLotacao);
 
             if (cadastrado == true) {
                 JOptionPane.showMessageDialog(null, "Lotacao cadastrada com sucesso!");
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Erro no cadastro!");
             }
 
-            TfBatalhao.setText("");
-            TfCompanhia.setText("");
-            TfPelotao.setText("");
-            LbNome.setText("");
         } catch (ExceptionBatalhaoVazio e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } catch (ExceptionLotacao e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-
+        limparCampos();
     }//GEN-LAST:event_CadastrarActionPerformed
-    
+
     /**
-     * Método para conferir se os campos foram preenchidos somente com números pelo usuário
-     * @throws ExceptionLotacao 
+     * Método para conferir se os campos foram preenchidos somente com números
+     * pelo usuário
+     *
+     * @throws ExceptionLotacao
      */
     private void conferirPreenchimento() throws ExceptionLotacao {
         if (!TfBatalhao.getText().isEmpty() || !TfCompanhia.getText().isEmpty() || !TfPelotao.getText().isEmpty()) {
@@ -409,15 +410,24 @@ public class LotacaoCadastrar extends javax.swing.JFrame {
             }
         }
     }
-    
+
     /**
-     * Método para conferir se o campo batalhão, que é obrigatório o preenchimento, foi preenchido pelo usuário
-     * @throws ExceptionBatalhaoVazio 
+     * Método para conferir se o campo batalhão, que é obrigatório o
+     * preenchimento, foi preenchido pelo usuário
+     *
+     * @throws ExceptionBatalhaoVazio
      */
     private void conferirBatalhao() throws ExceptionBatalhaoVazio {
         if (TfBatalhao.getText().isEmpty()) {
             throw new ExceptionBatalhaoVazio();
         }
+    }
+
+    private void limparCampos() {
+        TfBatalhao.setText("");
+        TfCompanhia.setText("");
+        TfPelotao.setText("");
+        LbNome.setText("");
     }
     private void PGCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PGCadastrarActionPerformed
         this.setVisible(false);
