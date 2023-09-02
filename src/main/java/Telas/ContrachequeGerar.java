@@ -1,9 +1,11 @@
 package Telas;
 
+import DAO.CompetenciaDAO;
 import br.com.senac.projetointegradordb.Contracheque;
 import br.com.senac.projetointegradordb.Militar;
 import Servicos.ContrachequeServicos;
 import Servicos.MilitarServicos;
+import br.com.senac.projetointegradordb.Competencia;
 import java.time.LocalDate;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -369,6 +371,10 @@ public class ContrachequeGerar extends javax.swing.JFrame {
             } else {
                 List<Militar> listaMil = militarServico.listar();
                 gerarContracheques(listaMil, data);
+                Competencia competencia = new Competencia();
+                competencia.setDataCompetencia(data);
+                CompetenciaDAO competDao = new CompetenciaDAO();
+                competDao.cadastrar(competencia);
                 JOptionPane.showMessageDialog(null, "Contracheques para " + data.getMonth().getValue() + "/" + data.getYear() + " gerados com sucesso!");
             }
         } catch (Exception e) {
@@ -380,11 +386,10 @@ public class ContrachequeGerar extends javax.swing.JFrame {
     private void gerarContracheques(List lista, LocalDate data) {
         for (int i = 0; i < lista.size(); i++) {
             Militar novoMilitar = (Militar) lista.get(i);
-            float subsidio = novoMilitar.getPostoGraduacao().getSalario();
             Contracheque novoContracheque = new Contracheque();
             novoContracheque.setDataContracheque(data);
             novoContracheque.setMilitar(novoMilitar);
-            novoContracheque.setSubsidio(subsidio);
+            novoContracheque.setSubsidio();
             novoContracheque.setAjudaCusto();
             novoContracheque.setSalarioBruto();
             novoContracheque.setPrevidencia();

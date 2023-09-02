@@ -69,6 +69,19 @@ public class MovimentacaoDAO {
         return listaMov;
     }
     
+     public Movimentacao buscarId(int id) {
+        EntityManager em = JPA.getEntityManager();
+        Movimentacao mov = null;
+        try {
+            Query consulta = em.createQuery("SELECT mov FROM Movimentacao mov WHERE mov.militar.id = id");
+            consulta.setParameter("id",id);
+            mov = (Movimentacao) consulta.getSingleResult();
+        } finally {
+            JPA.closeEntity();
+        }
+        return mov;
+    }
+    
     /**
      * Função para verificar se há movimentação não paga no banco de dados
      * @param militar

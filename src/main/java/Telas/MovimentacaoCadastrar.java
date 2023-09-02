@@ -1,5 +1,7 @@
 package Telas;
 
+import Subtelas.LotacaoConsultarPara;
+import Subtelas.MilitarConsultarPara;
 import Exceptions.ExceptionVazio;
 import br.com.senac.projetointegradordb.Lotacao;
 import br.com.senac.projetointegradordb.Militar;

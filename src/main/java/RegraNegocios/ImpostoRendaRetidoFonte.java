@@ -48,4 +48,7 @@ public class ImpostoRendaRetidoFonte {
         return aliquota;
     }
     
+    public float getDeducao(){
+        return deducao;
+    }
 }

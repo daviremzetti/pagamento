@@ -1,5 +1,6 @@
 package Telas;
 
+import Subtelas.MilitarConsultarPara;
 import br.com.senac.projetointegradordb.Dependente;
 import DAO.DependenteDAO;
 import Servicos.DependenteServicos;

@@ -1,5 +1,6 @@
 package Telas;
 
+import Subtelas.MilitarConsultarPara;
 import br.com.senac.projetointegradordb.Dependente;
 import br.com.senac.projetointegradordb.Endereco;
 import Exceptions.ExceptionVazio;

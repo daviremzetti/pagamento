@@ -63,4 +63,8 @@ public class MovimentacaoServicos {
     public void setPagamento(Movimentacao mov) {
         dao.setPagamento(mov);
     }
+    
+    public Movimentacao buscarId(int id){
+        return dao.buscarId(id);
+    }
 }

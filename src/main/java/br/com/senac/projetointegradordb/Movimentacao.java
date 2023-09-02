@@ -1,7 +1,6 @@
 
 package br.com.senac.projetointegradordb;
 
-import RegraNegocios.AjudaCustoCalcularValor;
 import RegraNegocios.AjudaCustoDefinirPorcentagem;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -86,11 +85,11 @@ public class Movimentacao {
     }
 
     public void setPorcentagem() {
-        this.porcentagem = AjudaCustoDefinirPorcentagem.definir(militar, this);
+        this.porcentagem = AjudaCustoDefinirPorcentagem.definir(militar);
     }
 
     public void setValor() {
-        this.valor = AjudaCustoCalcularValor.definir(militar, this);
+        this.valor = porcentagem * militar.getPostoGraduacao().getSalario()/100;
     }
 
     public void setPago(String pago) {

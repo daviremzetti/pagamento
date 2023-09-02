@@ -1,5 +1,6 @@
 package Telas;
 
+import Subtelas.MilitarConsultarPara;
 import br.com.senac.projetointegradordb.Contracheque;
 import Exceptions.ExceptionVazio;
 import Servicos.ContrachequeServicos;

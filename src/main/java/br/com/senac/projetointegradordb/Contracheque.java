@@ -102,13 +102,13 @@ public class Contracheque {
         this.dataContracheque = dataContracheque;
     }
 
-    public void setSubsidio(float subsidio) {
-        this.subsidio = subsidio;
+    public void setSubsidio() {
+        this.subsidio = militar.getPostoGraduacao().getSalario();
     }
 
     public void setAjudaCusto() {
-        this.indiceAjudaCusto = AjudaCustoLancarContracheque.aliquota(militar, this);
-        this.valorAjudaCusto = AjudaCustoLancarContracheque.valor(militar, this);
+        this.indiceAjudaCusto = AjudaCustoLancarContracheque.aliquota(militar);
+        this.valorAjudaCusto = AjudaCustoLancarContracheque.valor(militar);
     }
 
     public void setSalarioBruto() {
