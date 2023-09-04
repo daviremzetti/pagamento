@@ -1,5 +1,6 @@
 Subtelas\MilitarConsultarPara.class
 Telas\TelaPrincipal$13.class
+com\myproject\pitesterefatoracao\PITesteRefatoracao.class
 Telas\MilitarCadastrar$7.class
 Telas\DependenteCadastrar$6.class
 RegraNegocios\Previdencia.class
@@ -45,7 +46,6 @@ Telas\MilitarCadastrar$2.class
 Telas\MilitarConsultar$14.class
 Subtelas\MilitarConsultarPara$16.class
 Telas\DependenteCadastrar$16.class
-br\com\senac\projetointegradordb\ProjetoIntegradorDB.class
 Persistencia\JPA.class
 Telas\ContrachequeConsultar$3.class
 Telas\DependenteCadastrar$1.class
@@ -126,6 +126,7 @@ Subtelas\LotacaoConsultarPara$6.class
 Telas\DependenteCadastrar$12.class
 Telas\LotacaoConsultar$5.class
 Telas\MovimentacaoConsultar$13.class
+RegraNegocios\Tributos.class
 Subtelas\MilitarConsultarPara$7.class
 br\com\senac\projetointegradordb\RelacaoDependencia.class
 Servicos\MilitarServicos.class
@@ -224,7 +225,6 @@ Telas\MilitarConsultar$3.class
 Telas\MovimentacaoConsultar$2.class
 Telas\ContrachequeConsultar$14.class
 Telas\TelaPrincipal$15.class
-DAO\DAO.class
 Telas\PostoGraduacaoConsultar$11.class
 Telas\TelaPrincipal$4.class
 Telas\DependenteConsultar$3.class
@@ -283,6 +283,7 @@ Telas\LotacaoConsultar$14.class
 Telas\MovimentacaoCadastrar$11.class
 Telas\DependenteConsultar$14.class
 Telas\ContrachequeConsultar$10.class
+RegraNegocios\TributosComDeducoes.class
 Telas\ContrachequeGerar$2.class
 Telas\DependenteCadastrar$5.class
 DAO\ContrachequeDAO.class

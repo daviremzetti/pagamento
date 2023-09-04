@@ -1,6 +1,8 @@
 package Telas;
 
 import DAO.CompetenciaDAO;
+import DAO.ContrachequeDAO;
+import DAO.MilitarDAO;
 import br.com.senac.projetointegradordb.Contracheque;
 import br.com.senac.projetointegradordb.Militar;
 import Servicos.ContrachequeServicos;
@@ -17,8 +19,8 @@ import javax.swing.JOptionPane;
  */
 public class ContrachequeGerar extends javax.swing.JFrame {
 
-    private ContrachequeServicos servicoContracheque = new ContrachequeServicos();
-    private MilitarServicos militarServico = new MilitarServicos();
+    private ContrachequeServicos servicoContracheque = new ContrachequeServicos(new ContrachequeDAO());
+    private MilitarServicos militarServico = new MilitarServicos(new MilitarDAO());
 
     /**
      * Creates new form ContrachequeGerar

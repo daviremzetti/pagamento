@@ -1,5 +1,6 @@
 package RegraNegocios;
 
+import DAO.MovimentacaoDAO;
 import Servicos.MovimentacaoServicos;
 import br.com.senac.projetointegradordb.Militar;
 import br.com.senac.projetointegradordb.Movimentacao;
@@ -10,7 +11,7 @@ import br.com.senac.projetointegradordb.Movimentacao;
  */
 public class AjudaCustoLancarContracheque {
 
-    private static final MovimentacaoServicos servicoMov = new MovimentacaoServicos();
+    private static final MovimentacaoServicos servicoMov = new MovimentacaoServicos(new MovimentacaoDAO());
     
     private static boolean controle;
     private static Movimentacao mov;

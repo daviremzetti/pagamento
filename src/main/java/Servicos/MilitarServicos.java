@@ -1,6 +1,5 @@
 package Servicos;
 
-import DAO.DAO;
 import DAO.MilitarDAO;
 import br.com.senac.projetointegradordb.Militar;
 import java.util.List;
@@ -10,7 +9,12 @@ import java.util.List;
  * @author biancamarques
  */
 public class MilitarServicos {
-    MilitarDAO dao = DAO.getMilitarDAO();
+    
+    private MilitarDAO dao;
+    
+    public MilitarServicos(MilitarDAO dao){
+        this.dao = dao;
+    }
     /**
      * Método para cadastrar Militar no banco de dados
      *

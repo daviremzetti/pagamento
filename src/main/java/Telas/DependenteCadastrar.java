@@ -1,5 +1,7 @@
 package Telas;
 
+import DAO.DependenteDAO;
+import DAO.EnderecoDAO;
 import Subtelas.MilitarConsultarPara;
 import br.com.senac.projetointegradordb.Dependente;
 import br.com.senac.projetointegradordb.Endereco;
@@ -611,9 +613,9 @@ public class DependenteCadastrar extends javax.swing.JFrame {
     }//GEN-LAST:event_ConsultarMilitarActionPerformed
 
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
-        RelacaoDependenciaServicos servicoRelDep = new RelacaoDependenciaServicos();
-        DependenteServicos servicoDependente = new DependenteServicos();
-        EnderecoServicos servicoEndereco = new EnderecoServicos();
+        RelacaoDependenciaServicos servicoRelDep = new RelacaoDependenciaServicos(new RelacaoDependenciaDAO());
+        DependenteServicos servicoDependente = new DependenteServicos(new DependenteDAO());
+        EnderecoServicos servicoEndereco = new EnderecoServicos(new EnderecoDAO());
         servicoEndereco.setEndereco(endereco);
         
         String numero = TfNumero.getText();

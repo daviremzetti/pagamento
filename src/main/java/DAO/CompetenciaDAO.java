@@ -6,6 +6,7 @@ import br.com.senac.projetointegradordb.Competencia;
 import jakarta.persistence.EntityManager;
 
 
+
 /**
  * Classe de Acesso aos Dados Competencia no banco de dados
  * @author daviremzetti

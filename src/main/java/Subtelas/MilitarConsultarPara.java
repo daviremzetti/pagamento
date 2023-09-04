@@ -430,7 +430,7 @@ public class MilitarConsultarPara extends javax.swing.JFrame {
         String cpfDigitado = TfCpf.getText();
         String nomeDigitado = TfNome.getText().toUpperCase();
 
-        MilitarServicos servicoMil = new MilitarServicos();
+        MilitarServicos servicoMil = new MilitarServicos(new MilitarDAO());
         List<Militar> lista;
 
         if (matriculaDigitada.equals("   .   - ") && cpfDigitado.equals("   .   .   -  ") && nomeDigitado.isEmpty()) {

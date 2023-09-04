@@ -1,6 +1,5 @@
 package Servicos;
 
-import DAO.DAO;
 import DAO.LotacaoDAO;
 import br.com.senac.projetointegradordb.Lotacao;
 import java.util.List;
@@ -11,7 +10,11 @@ import java.util.List;
  */
 public class LotacaoServicos {
     
-    private static final LotacaoDAO dao = DAO.getLotacaoDAO();
+    private LotacaoDAO dao;
+    
+    public LotacaoServicos(LotacaoDAO dao){
+        this.dao = dao;
+    }
 
     /**
      * Método para cadastrar Lotacao no banco de dados

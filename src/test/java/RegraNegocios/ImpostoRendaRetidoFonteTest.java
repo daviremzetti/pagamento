@@ -1,5 +1,6 @@
 package RegraNegocios;
 
+import DAO.ContrachequeDAO;
 import Servicos.ContrachequeServicos;
 import br.com.senac.projetointegradordb.Contracheque;
 import java.time.LocalDate;
@@ -33,7 +34,7 @@ public class ImpostoRendaRetidoFonteTest {
     @Before
     public void setUp() {
         
-        servicoCont = new ContrachequeServicos();
+        servicoCont = new ContrachequeServicos(new ContrachequeDAO());
     }
 
     @After
@@ -50,7 +51,7 @@ public class ImpostoRendaRetidoFonteTest {
         data = LocalDate.of(2023, 01, 25);
         Contracheque contracheque = servicoCont.consultar("980.385-6", data);
         float esperado = 0.0F;
-        float resultado = irrf.pagar(contracheque);
+        float resultado = irrf.descontar(contracheque);
         float deducao = irrf.getDeducao();
         float aliquota = irrf.getAliquota();
         System.out.println("Aliquota: " + aliquota + ". Deducao: " + deducao);
@@ -67,7 +68,7 @@ public class ImpostoRendaRetidoFonteTest {
         ImpostoRendaRetidoFonte irrf = new ImpostoRendaRetidoFonte();
         data = LocalDate.of(2023, 01, 25);
         Contracheque contracheque = servicoCont.consultar("980.385-6", data);
-        float valor = irrf.pagar(contracheque);
+        float valor = irrf.descontar(contracheque);
         float esperado = 0.0F;
         float resultado = irrf.getAliquota();
         float deducao = irrf.getDeducao();
@@ -84,7 +85,7 @@ public class ImpostoRendaRetidoFonteTest {
         data = LocalDate.of(2023, 01, 25);
         Contracheque contracheque = servicoCont.consultar("935.126-8", data);
         float esperado = 10.35F;
-        float resultado = irrf.pagar(contracheque);
+        float resultado = irrf.descontar(contracheque);
         float deducao = irrf.getDeducao();
         float aliquota = irrf.getAliquota();
         System.out.println("Aliquota: " + aliquota + ". Deducao: " + deducao);
@@ -101,7 +102,7 @@ public class ImpostoRendaRetidoFonteTest {
         ImpostoRendaRetidoFonte irrf = new ImpostoRendaRetidoFonte();
         data = LocalDate.of(2023, 01, 25);
         Contracheque contracheque = servicoCont.consultar("935.126-8", data);
-        float valor = irrf.pagar(contracheque);
+        float valor = irrf.descontar(contracheque);
         float esperado = 7.50F;
         float resultado = irrf.getAliquota();
         float deducao = irrf.getDeducao();
@@ -118,7 +119,7 @@ public class ImpostoRendaRetidoFonteTest {
         data = LocalDate.of(2023, 01, 25);
         Contracheque contracheque = servicoCont.consultar("390.605-2", data);
         float esperado = 169.60F;
-        float resultado = irrf.pagar(contracheque);
+        float resultado = irrf.descontar(contracheque);
         float deducao = irrf.getDeducao();
         float aliquota = irrf.getAliquota();
         System.out.println("Aliquota: " + aliquota + ". Deducao: " + deducao);
@@ -132,7 +133,7 @@ public class ImpostoRendaRetidoFonteTest {
         ImpostoRendaRetidoFonte irrf = new ImpostoRendaRetidoFonte();
         data = LocalDate.of(2023, 01, 25);
         Contracheque contracheque = servicoCont.consultar("390.605-2", data);
-        float valor = irrf.pagar(contracheque);
+        float valor = irrf.descontar(contracheque);
         float esperado = 15.0F;
         float resultado = irrf.getAliquota();
         float deducao = irrf.getDeducao();
@@ -149,7 +150,7 @@ public class ImpostoRendaRetidoFonteTest {
         data = LocalDate.of(2023, 01, 25);
         Contracheque contracheque = servicoCont.consultar("929.252-6", data);
         float esperado = 259.52F;
-        float resultado = irrf.pagar(contracheque);
+        float resultado = irrf.descontar(contracheque);
         float deducao = irrf.getDeducao();
         float aliquota = irrf.getAliquota();
         System.out.println("Aliquota: " + aliquota + ". Deducao: " + deducao);
@@ -163,7 +164,7 @@ public class ImpostoRendaRetidoFonteTest {
         ImpostoRendaRetidoFonte irrf = new ImpostoRendaRetidoFonte();
         data = LocalDate.of(2023, 01, 25);
         Contracheque contracheque = servicoCont.consultar("929.252-6", data);
-        float valor = irrf.pagar(contracheque);
+        float valor = irrf.descontar(contracheque);
         float esperado = 22.5F;
         float resultado = irrf.getAliquota();
         float deducao = irrf.getDeducao();
@@ -180,7 +181,7 @@ public class ImpostoRendaRetidoFonteTest {
         data = LocalDate.of(2023, 01, 25);
         Contracheque contracheque = servicoCont.consultar("929.564-2", data);
         float esperado = 1218.79F;
-        float resultado = irrf.pagar(contracheque);
+        float resultado = irrf.descontar(contracheque);
         float deducao = irrf.getDeducao();
         float aliquota = irrf.getAliquota();
         System.out.println("Aliquota: " + aliquota + ". Deducao: " + deducao);
@@ -194,7 +195,7 @@ public class ImpostoRendaRetidoFonteTest {
         ImpostoRendaRetidoFonte irrf = new ImpostoRendaRetidoFonte();
         data = LocalDate.of(2023, 01, 25);
         Contracheque contracheque = servicoCont.consultar("929.564-2", data);
-        float valor = irrf.pagar(contracheque);
+        float valor = irrf.descontar(contracheque);
         float esperado = 27.5F;
         float resultado = irrf.getAliquota();
         float deducao = irrf.getDeducao();

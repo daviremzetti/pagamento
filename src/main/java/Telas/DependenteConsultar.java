@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 public class DependenteConsultar extends javax.swing.JFrame {
 
     private Militar militar;
-    private DependenteServicos servicoDep = new DependenteServicos();
+    private DependenteServicos servicoDep = new DependenteServicos(new DependenteDAO());
 
     public DependenteConsultar() {
         initComponents();

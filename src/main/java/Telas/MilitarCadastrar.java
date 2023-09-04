@@ -1,5 +1,6 @@
 package Telas;
 
+import DAO.EnderecoDAO;
 import br.com.senac.projetointegradordb.Endereco;
 import Exceptions.ExceptionVazio;
 import br.com.senac.projetointegradordb.Lotacao;
@@ -502,7 +503,7 @@ public class MilitarCadastrar extends javax.swing.JFrame {
         
         String numero = TfNumero.getText();
         String cep = TfCep.getText();
-        EnderecoServicos servicoEndereco = new EnderecoServicos();
+        EnderecoServicos servicoEndereco = new EnderecoServicos(new EnderecoDAO());
         servicoEndereco.setEndereco(endereco);
         Endereco novoEndereco = servicoEndereco.cadastrar(numero, cep);
         
@@ -527,7 +528,7 @@ public class MilitarCadastrar extends javax.swing.JFrame {
             novoMilitar.setNome(nome);
             novoMilitar.setEndereco(novoEndereco);
 
-            MilitarServicos servicoMil = new MilitarServicos();
+            MilitarServicos servicoMil = new MilitarServicos(new MilitarDAO());
             boolean cadastrado = servicoMil.cadastrar(novoMilitar);
 
             if (cadastrado == true) {
@@ -577,7 +578,7 @@ public class MilitarCadastrar extends javax.swing.JFrame {
      * @return
      */
     private Lotacao selecionarLotacao(String lotacaoSelecionada) {
-        LotacaoServicos servicoLot = new LotacaoServicos();
+        LotacaoServicos servicoLot = new LotacaoServicos(new LotacaoDAO());
         Lotacao lotacao = servicoLot.buscarNome(lotacaoSelecionada);
         return lotacao;
     }
@@ -589,7 +590,7 @@ public class MilitarCadastrar extends javax.swing.JFrame {
      * @return
      */
     private PostoGraduacao selecionarPosto(String postoSelecionado) {
-        PostoGraduacaoServicos postoGradServ = new PostoGraduacaoServicos();
+        PostoGraduacaoServicos postoGradServ = new PostoGraduacaoServicos(new PostoGraduacaoDAO());
         PostoGraduacao posto = postoGradServ.buscaPostoPorNome(postoSelecionado);
         return posto;
     }

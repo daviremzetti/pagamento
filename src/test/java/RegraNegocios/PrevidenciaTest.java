@@ -1,6 +1,7 @@
 
 package RegraNegocios;
 
+import DAO.ContrachequeDAO;
 import Servicos.ContrachequeServicos;
 import br.com.senac.projetointegradordb.Contracheque;
 import java.time.LocalDate;
@@ -36,7 +37,7 @@ public class PrevidenciaTest {
     @Before
     public void setUp() {
         previdencia = new Previdencia();
-        servicoCont = new ContrachequeServicos();
+        servicoCont = new ContrachequeServicos(new ContrachequeDAO());
         data = LocalDate.of(2023, 01, 25);
         contracheque = servicoCont.consultar("929.564-2", data);
     }
@@ -52,7 +53,7 @@ public class PrevidenciaTest {
     public void testDescontar() {
         System.out.println("descontar");
         float expResult = 850.0F;
-        float result = Previdencia.descontar(contracheque);
+        float result = previdencia.descontar(contracheque);
         System.out.println("Esperado: " + expResult + " .Resultado: " + result);
         assertEquals(expResult, result, 0);
     }
@@ -64,7 +65,7 @@ public class PrevidenciaTest {
     public void testGetAliquota() {
         System.out.println("getAliquota");
         float expResult = 0.1F;
-        float result = Previdencia.getAliquota();
+        float result = previdencia.getAliquota();
         System.out.println("Esperado: " + expResult + " .Resultado: " + result);
     }
     

@@ -1,5 +1,6 @@
 package Telas;
 
+import DAO.MovimentacaoDAO;
 import Subtelas.LotacaoConsultarPara;
 import Subtelas.MilitarConsultarPara;
 import Exceptions.ExceptionVazio;
@@ -535,7 +536,7 @@ public class MovimentacaoCadastrar extends javax.swing.JFrame {
             novaMovimentacao.setDestino(destino);
             novaMovimentacao.setPorcentagem();
             novaMovimentacao.setValor();
-            MovimentacaoServicos servicoMov = new MovimentacaoServicos();
+            MovimentacaoServicos servicoMov = new MovimentacaoServicos(new MovimentacaoDAO());
             boolean cadastrado = servicoMov.cadastrar(novaMovimentacao);
             if (cadastrado == true) {
                 JOptionPane.showMessageDialog(null, "Movimentacao cadastrada com sucesso!");

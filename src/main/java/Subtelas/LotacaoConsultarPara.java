@@ -1,5 +1,6 @@
 package Subtelas;
 
+import DAO.LotacaoDAO;
 import br.com.senac.projetointegradordb.Lotacao;
 import Servicos.LotacaoServicos;
 import Telas.MovimentacaoCadastrar;
@@ -14,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 public class LotacaoConsultarPara extends javax.swing.JFrame {
 
     private MovimentacaoCadastrar cadastroMov;
-    private LotacaoServicos servicoLot = new LotacaoServicos();
+    private LotacaoServicos servicoLot = new LotacaoServicos(new LotacaoDAO());
 
     public LotacaoConsultarPara() {
         initComponents();

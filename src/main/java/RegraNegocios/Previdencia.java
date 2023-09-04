@@ -7,22 +7,20 @@ import br.com.senac.projetointegradordb.Contracheque;
  *
  * @author biancamarques
  */
-public class Previdencia {
+public class Previdencia implements Tributos {
     
     private static float valorPrevidencia;
     private static final float aliquota = (float) 0.10;
-    
-    private static void calcular(Contracheque contracheque){
+
+    @Override
+    public float descontar(Contracheque contracheque){
         float baseCalculo = contracheque.getSubsidio();
         valorPrevidencia = baseCalculo * aliquota;
-    }
-
-    public static float descontar(Contracheque contracheque){
-        calcular(contracheque);
         return valorPrevidencia;
     }
     
-    public static float getAliquota(){
+    @Override
+    public float getAliquota(){
         return aliquota;
     }
     

@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class LotacaoConsultar extends javax.swing.JFrame {
     
-    private LotacaoServicos servicoLot = new LotacaoServicos();
+    private LotacaoServicos servicoLot = new LotacaoServicos(new LotacaoDAO());
 
     public LotacaoConsultar() {
         initComponents();

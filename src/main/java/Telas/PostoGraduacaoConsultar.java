@@ -1,5 +1,6 @@
 package Telas;
 
+import DAO.PostoGraduacaoDAO;
 import br.com.senac.projetointegradordb.PostoGraduacao;
 import Servicos.PostoGraduacaoServicos;
 import java.util.List;
@@ -344,7 +345,7 @@ public class PostoGraduacaoConsultar extends javax.swing.JFrame {
         List <PostoGraduacao> lista;
         String filtro = TfNome.getText();
         boolean filtroVazio = TfNome.getText().isEmpty();
-        PostoGraduacaoServicos postGradServico = new PostoGraduacaoServicos();
+        PostoGraduacaoServicos postGradServico = new PostoGraduacaoServicos(new PostoGraduacaoDAO());
         if (filtroVazio) {
             lista = postGradServico.listar();
         } else {

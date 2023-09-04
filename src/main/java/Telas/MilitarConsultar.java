@@ -1,9 +1,8 @@
 package Telas;
 
-import br.com.senac.projetointegradordb.Militar;
 import DAO.MilitarDAO;
+import br.com.senac.projetointegradordb.Militar;
 import Servicos.MilitarServicos;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -394,7 +393,7 @@ public class MilitarConsultar extends javax.swing.JFrame {
         String cpf = TfCpf.getText();
         String nome = TfNome.getText();
         List<Militar> lista;
-        MilitarServicos servicoMil = new MilitarServicos();
+        MilitarServicos servicoMil = new MilitarServicos(new MilitarDAO());
         boolean listarTodos = listarTodos(matricula, cpf, nome);
         if (listarTodos == true) {
             lista = servicoMil.listar();
@@ -408,11 +407,7 @@ public class MilitarConsultar extends javax.swing.JFrame {
     private boolean listarTodos(String matricula, String cpf, String nome) {
 
         boolean listar;
-        if (matricula.equals("   .   - ") && cpf.equals("   .   .   -  ") && nome.isEmpty()) {
-            listar = true;
-        } else {
-            listar = false;
-        }
+        listar = matricula.equals("   .   - ") && cpf.equals("   .   .   -  ") && nome.isEmpty();
         return listar;
     }
 

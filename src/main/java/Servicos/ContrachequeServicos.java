@@ -2,7 +2,6 @@
 package Servicos;
 
 import DAO.ContrachequeDAO;
-import DAO.DAO;
 import br.com.senac.projetointegradordb.Contracheque;
 import java.time.LocalDate;
 import java.util.List;
@@ -13,7 +12,11 @@ import java.util.List;
  */
 public class ContrachequeServicos {
     
-    private static final ContrachequeDAO dao = DAO.getContrachequeDAO();
+    private ContrachequeDAO dao;
+    
+    public ContrachequeServicos(ContrachequeDAO dao){
+        this.dao = dao;
+    }
     
     public boolean cadastrar(Contracheque contracheque) {
        return dao.cadastrar(contracheque);
@@ -33,7 +36,14 @@ public class ContrachequeServicos {
      * @return 
      */
     public boolean conferirGerados(LocalDate data) {
-        return dao.conferirGerados(data);
+        boolean gerado;
+        int quantidade = dao.conferirGerados(data);
+        if(quantidade > 0){
+            gerado = true;
+        }else{
+            gerado = false;
+        }
+        return gerado;
     }
     
     /**

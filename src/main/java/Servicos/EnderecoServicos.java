@@ -1,11 +1,7 @@
 package Servicos;
 
-import DAO.DAO;
 import DAO.EnderecoDAO;
-import Persistencia.JPA;
 import br.com.senac.projetointegradordb.Endereco;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
 import org.json.JSONObject;
 
 /**
@@ -14,10 +10,15 @@ import org.json.JSONObject;
  */
 public class EnderecoServicos {
     
-    String endereco;
+    private EnderecoDAO dao;
+    private String endereco;
+    
+    public EnderecoServicos(EnderecoDAO dao){
+        this.dao = dao;
+    }
 
-    public Endereco cadastrar(String numero, String cep) {
-        EnderecoDAO dao = DAO.getEnderecoDAO();
+    public Endereco cadastrar(String cep, String numero) {
+       
         Endereco novoEndereco = dao.consultar(cep, numero);
         if (novoEndereco == null) {
             novoEndereco = new Endereco();
@@ -34,23 +35,10 @@ public class EnderecoServicos {
     }
 
     public Endereco consultar(String cep, String numero) {
-        EntityManager em = JPA.getEntityManager();
-        Endereco endereco;
-        try {
-            Query consulta = em.createQuery("SELECT c FROM cep c WHERE c.cep = :cep AND c.numero =: numero");
-            consulta.setParameter("cep", cep);
-            consulta.setParameter("numero", numero);
-            endereco = (Endereco) consulta.getSingleResult();
-        } catch (Exception e) {
-            return null;
-        }
-        return endereco;
+        return dao.consultar(cep, numero);
     }
-
-    public void setEndereco(String endereco) {
+    
+    public void setEndereco(String endereco){
         this.endereco = endereco;
     }
-    
-    
-
 }

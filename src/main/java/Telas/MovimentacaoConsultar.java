@@ -365,7 +365,7 @@ public class MovimentacaoConsultar extends javax.swing.JFrame {
     }//GEN-LAST:event_SairActionPerformed
 
     private void ConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarActionPerformed
-        MovimentacaoServicos servicoMov = new MovimentacaoServicos();
+        MovimentacaoServicos servicoMov = new MovimentacaoServicos(new MovimentacaoDAO());
         List <Movimentacao> lista;
         boolean listarTodos = this.listarTodos();
         if(listarTodos == true){

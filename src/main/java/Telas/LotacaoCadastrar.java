@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class LotacaoCadastrar extends javax.swing.JFrame {
 
-    private LotacaoServicos servicoLot = new LotacaoServicos();
+    private LotacaoServicos servicoLot = new LotacaoServicos(new LotacaoDAO());
 
     public LotacaoCadastrar() {
         initComponents();

@@ -1,6 +1,7 @@
 
 package RegraNegocios;
 
+import DAO.DependenteDAO;
 import Servicos.DependenteServicos;
 import br.com.senac.projetointegradordb.Militar;
 
@@ -11,7 +12,7 @@ import br.com.senac.projetointegradordb.Militar;
 public class AjudaCustoDefinirPorcentagem {
     
     public static float definir(Militar militar){
-        DependenteServicos depServico = new DependenteServicos();
+        DependenteServicos depServico = new DependenteServicos(new DependenteDAO());
         int qtdDep = depServico.contarDependente(militar);
         float porcentagem;
         if(qtdDep == 0){

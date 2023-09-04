@@ -1,6 +1,5 @@
 package Servicos;
 
-import DAO.DAO;
 import DAO.RelacaoDependenciaDAO;
 import br.com.senac.projetointegradordb.RelacaoDependencia;
 import java.util.List;
@@ -10,9 +9,14 @@ import java.util.List;
  * @author biancamarques
  */
 public class RelacaoDependenciaServicos {
+    
+    private RelacaoDependenciaDAO dao;
+    
+    public RelacaoDependenciaServicos(RelacaoDependenciaDAO dao){
+        this.dao = dao;
+    }
 
     public List<RelacaoDependencia> listar() {
-        RelacaoDependenciaDAO dao = DAO.getRelacaoDependenciaDAO();
         return dao.listar();
     }
 
@@ -23,7 +27,6 @@ public class RelacaoDependenciaServicos {
      * @return
      */
     public RelacaoDependencia filtrar(String nome) {
-        RelacaoDependenciaDAO dao = DAO.getRelacaoDependenciaDAO();
         return dao.filtrar(nome);
     }
 }

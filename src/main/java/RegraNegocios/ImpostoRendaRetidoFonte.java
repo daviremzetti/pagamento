@@ -7,7 +7,7 @@ import br.com.senac.projetointegradordb.Contracheque;
  *
  * @author biancamarques
  */
-public class ImpostoRendaRetidoFonte {
+public class ImpostoRendaRetidoFonte implements TributosComDeducoes {
     
     private float baseCalculo;
     private float aliquota;
@@ -15,7 +15,8 @@ public class ImpostoRendaRetidoFonte {
     private float valorImposto;
     
     
-    public float pagar(Contracheque contracheque) {
+    @Override
+    public float descontar(Contracheque contracheque) {
         baseCalculo = contracheque.getSubsidio() - contracheque.getValorPrevidencia();
         boolean primeiraFaixa = baseCalculo <= 2112.00;
         boolean segundaFaixa = baseCalculo > 2112.00 && baseCalculo <= 2826.65;

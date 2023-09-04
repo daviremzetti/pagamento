@@ -1,5 +1,6 @@
 package Telas;
 
+import DAO.ContrachequeDAO;
 import Subtelas.MilitarConsultarPara;
 import br.com.senac.projetointegradordb.Contracheque;
 import Exceptions.ExceptionVazio;
@@ -460,7 +461,7 @@ public class ContrachequeConsultar extends javax.swing.JFrame {
             int ano = Integer.parseInt(TfAno.getText());
             LocalDate competencia = LocalDate.of(ano, mes, 01);
             String matricula = TfMatricula.getText();
-            ContrachequeServicos servicoContracheque = new ContrachequeServicos();
+            ContrachequeServicos servicoContracheque = new ContrachequeServicos(new ContrachequeDAO());
             Contracheque contracheque = servicoContracheque.consultar(matricula, competencia);
             if (contracheque == null) {
                 JOptionPane.showMessageDialog(null, "Não existe contracheque para o militar e a data informados ");

@@ -1,7 +1,6 @@
 
 package Servicos;
 
-import DAO.DAO;
 import DAO.DependenteDAO;
 import br.com.senac.projetointegradordb.Dependente;
 import br.com.senac.projetointegradordb.Militar;
@@ -13,8 +12,14 @@ import java.util.List;
  */
 public class DependenteServicos {
     
+    private DependenteDAO dao;
+    
+    public DependenteServicos(DependenteDAO dao){
+        this.dao = dao;
+    }
+    
     public boolean cadastrar(Dependente dependente){
-        DependenteDAO dao = DAO.getDependenteDAO();
+
         return dao.cadastrar(dependente);
     }
     
@@ -23,7 +28,6 @@ public class DependenteServicos {
      * @return 
      */
     public List<Dependente> listar(){
-        DependenteDAO dao = DAO.getDependenteDAO();
         return dao.listar();
     }
     
@@ -33,7 +37,6 @@ public class DependenteServicos {
      * @return 
      */
     public Dependente buscarId(int id){
-        DependenteDAO dao = DAO.getDependenteDAO();
         return dao.buscarId(id);
     }
     
@@ -43,7 +46,6 @@ public class DependenteServicos {
      * @return 
      */
     public int contarDependente(Militar militar){
-        DependenteDAO dao = DAO.getDependenteDAO();
         return dao.contarDependente(militar);
     }
     
@@ -56,7 +58,6 @@ public class DependenteServicos {
      * @return 
      */
     public List<Dependente> filtrar(String nomeDep, String cpfDep, String matriculaMant){
-        DependenteDAO dao = DAO.getDependenteDAO();
         return dao.filtrar(nomeDep, cpfDep, matriculaMant);
     }
 }

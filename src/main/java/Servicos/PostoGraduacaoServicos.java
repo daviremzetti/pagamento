@@ -1,7 +1,6 @@
 
 package Servicos;
 
-import DAO.DAO;
 import DAO.PostoGraduacaoDAO;
 import br.com.senac.projetointegradordb.PostoGraduacao;
 import java.util.List;
@@ -12,7 +11,11 @@ import java.util.List;
  */
 public class PostoGraduacaoServicos {
     
-    PostoGraduacaoDAO dao = DAO.getPostoGraduacaoDAO();
+    PostoGraduacaoDAO dao;
+    
+    public PostoGraduacaoServicos(PostoGraduacaoDAO dao){
+        this.dao = dao;
+    }
 
     public boolean cadastrar(PostoGraduacao postoGraduacao) {
         return dao.cadastrar(postoGraduacao);

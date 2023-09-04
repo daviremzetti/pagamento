@@ -1,5 +1,6 @@
 package RegraNegocios;
 
+import DAO.MilitarDAO;
 import Servicos.MilitarServicos;
 import br.com.senac.projetointegradordb.Militar;
 import org.junit.After;
@@ -33,7 +34,7 @@ public class AjudaCustoDefinirPorcentagemTest {
 
     @Before
     public void setUp() {
-        servicoMil = new MilitarServicos();
+        servicoMil = new MilitarServicos(new MilitarDAO());
     }
 
     @After

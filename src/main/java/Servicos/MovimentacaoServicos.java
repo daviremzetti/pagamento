@@ -1,6 +1,5 @@
 package Servicos;
 
-import DAO.DAO;
 import DAO.MovimentacaoDAO;
 import br.com.senac.projetointegradordb.Militar;
 import br.com.senac.projetointegradordb.Movimentacao;
@@ -12,7 +11,11 @@ import java.util.List;
  */
 public class MovimentacaoServicos {
     
-    MovimentacaoDAO dao = DAO.getMovimentacaoDAO();
+    MovimentacaoDAO dao;
+    
+    public MovimentacaoServicos(MovimentacaoDAO dao){
+        this.dao = dao;
+    }
 
     /**
      * Método para cadastrar movimentação no banco de dados
