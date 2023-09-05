@@ -2,7 +2,7 @@
 package DAO;
 
 import Persistencia.JPA;
-import br.com.senac.projetointegradordb.Competencia;
+import com.myproject.modelo.Competencia;
 import jakarta.persistence.EntityManager;
 
 

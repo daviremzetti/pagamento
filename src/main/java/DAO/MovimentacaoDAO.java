@@ -1,8 +1,8 @@
 package DAO;
 
 import Persistencia.JPA;
-import br.com.senac.projetointegradordb.Militar;
-import br.com.senac.projetointegradordb.Movimentacao;
+import com.myproject.modelo.Militar;
+import com.myproject.modelo.Movimentacao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import java.util.List;

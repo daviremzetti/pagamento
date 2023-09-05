@@ -1,4 +1,4 @@
-package br.com.senac.projetointegradordb;
+package com.myproject.modelo;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

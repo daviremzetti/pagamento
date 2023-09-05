@@ -1,7 +1,8 @@
 package Servicos;
 
 import DAO.EnderecoDAO;
-import br.com.senac.projetointegradordb.Endereco;
+import com.myproject.modelo.Endereco;
+
 import org.json.JSONObject;
 
 /**

@@ -1,5 +1,5 @@
 
-package br.com.senac.projetointegradordb;
+package com.myproject.modelo;
 
 import RegraNegocios.AjudaCustoLancarContracheque;
 import RegraNegocios.ImpostoRendaRetidoFonte;

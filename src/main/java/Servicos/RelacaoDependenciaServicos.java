@@ -1,7 +1,7 @@
 package Servicos;
 
 import DAO.RelacaoDependenciaDAO;
-import br.com.senac.projetointegradordb.RelacaoDependencia;
+import com.myproject.modelo.RelacaoDependencia;
 import java.util.List;
 
 /**

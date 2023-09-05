@@ -2,7 +2,7 @@
 package DAO;
 
 import Persistencia.JPA;
-import br.com.senac.projetointegradordb.Endereco;
+import com.myproject.modelo.Endereco;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 
@@ -28,7 +28,7 @@ public class EnderecoDAO {
         EntityManager em = JPA.getEntityManager();
         Endereco endereco;
         try{
-            Query consulta = em.createQuery("SELECT e FROM Endereco e WHERE e.cep = :cep AND e.numero =: numero");
+            Query consulta = em.createQuery("SELECT e FROM Endereco e WHERE e.cep = :cep AND e.numero = :numero");
             consulta.setParameter("cep", cep);
             consulta.setParameter("numero", numero);
             endereco = (Endereco) consulta.getSingleResult();

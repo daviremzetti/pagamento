@@ -3,21 +3,20 @@ package Telas;
 import DAO.DependenteDAO;
 import DAO.EnderecoDAO;
 import Subtelas.MilitarConsultarPara;
-import br.com.senac.projetointegradordb.Dependente;
-import br.com.senac.projetointegradordb.Endereco;
 import Exceptions.ExceptionVazio;
-import br.com.senac.projetointegradordb.Militar;
-import br.com.senac.projetointegradordb.RelacaoDependencia;
 import DAO.RelacaoDependenciaDAO;
 import Servicos.DependenteServicos;
 import Servicos.EnderecoServicos;
 import Servicos.RelacaoDependenciaServicos;
 import Servicos.WebService;
+import com.myproject.modelo.Dependente;
+import com.myproject.modelo.Endereco;
+import com.myproject.modelo.Militar;
+import com.myproject.modelo.RelacaoDependencia;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-
 
 /**
  * Classe da tela de cadastro de dependente
@@ -613,19 +612,21 @@ public class DependenteCadastrar extends javax.swing.JFrame {
     }//GEN-LAST:event_ConsultarMilitarActionPerformed
 
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
+
         RelacaoDependenciaServicos servicoRelDep = new RelacaoDependenciaServicos(new RelacaoDependenciaDAO());
         DependenteServicos servicoDependente = new DependenteServicos(new DependenteDAO());
         EnderecoServicos servicoEndereco = new EnderecoServicos(new EnderecoDAO());
         servicoEndereco.setEndereco(endereco);
-        
+
         String numero = TfNumero.getText();
         String cep = TfCep.getText();
-        String relacaoSelecionada = CbxRelacao.getSelectedItem().toString();
-        
-        Endereco novoEndereco = servicoEndereco.cadastrar(numero, cep);
-        
+
+        Endereco novoEndereco = servicoEndereco.cadastrar(cep, numero);
+
         String nome = TfNome.getText().toUpperCase();
         String cpf = TfCpf.getText();
+
+        String relacaoSelecionada = CbxRelacao.getSelectedItem().toString();
         RelacaoDependencia relacao = servicoRelDep.filtrar(relacaoSelecionada);
 
         try {
@@ -690,7 +691,7 @@ public class DependenteCadastrar extends javax.swing.JFrame {
             String cidade = ws.getCidade();
             String estado = ws.getEstado();
             setCampos(logradouro, bairro, cidade, estado);
-        } catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Preencher campo CEP");
         }
 

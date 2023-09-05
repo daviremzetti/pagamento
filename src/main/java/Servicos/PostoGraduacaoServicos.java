@@ -2,7 +2,7 @@
 package Servicos;
 
 import DAO.PostoGraduacaoDAO;
-import br.com.senac.projetointegradordb.PostoGraduacao;
+import com.myproject.modelo.PostoGraduacao;
 import java.util.List;
 
 /**

@@ -3,7 +3,7 @@ package RegraNegocios;
 
 import DAO.ContrachequeDAO;
 import Servicos.ContrachequeServicos;
-import br.com.senac.projetointegradordb.Contracheque;
+import com.myproject.modelo.Contracheque;
 import java.time.LocalDate;
 import org.junit.After;
 import org.junit.AfterClass;

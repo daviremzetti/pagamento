@@ -4,11 +4,11 @@ import DAO.MovimentacaoDAO;
 import Subtelas.LotacaoConsultarPara;
 import Subtelas.MilitarConsultarPara;
 import Exceptions.ExceptionVazio;
-import br.com.senac.projetointegradordb.Lotacao;
-import br.com.senac.projetointegradordb.Militar;
-import br.com.senac.projetointegradordb.Movimentacao;
 import Formatacoes.StringToLocalDate;
 import Servicos.MovimentacaoServicos;
+import com.myproject.modelo.Lotacao;
+import com.myproject.modelo.Militar;
+import com.myproject.modelo.Movimentacao;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 

@@ -1,7 +1,7 @@
 package Servicos;
 
 import DAO.MilitarDAO;
-import br.com.senac.projetointegradordb.Militar;
+import com.myproject.modelo.Militar;
 import java.util.List;
 
 /**

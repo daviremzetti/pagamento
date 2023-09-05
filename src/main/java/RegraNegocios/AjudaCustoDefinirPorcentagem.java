@@ -3,7 +3,7 @@ package RegraNegocios;
 
 import DAO.DependenteDAO;
 import Servicos.DependenteServicos;
-import br.com.senac.projetointegradordb.Militar;
+import com.myproject.modelo.Militar;
 
 /**
  *

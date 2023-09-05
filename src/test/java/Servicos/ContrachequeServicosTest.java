@@ -1,8 +1,8 @@
 package Servicos;
 
 import DAO.ContrachequeDAO;
-import br.com.senac.projetointegradordb.Contracheque;
-import br.com.senac.projetointegradordb.Militar;
+import com.myproject.modelo.Contracheque;
+import com.myproject.modelo.Militar;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

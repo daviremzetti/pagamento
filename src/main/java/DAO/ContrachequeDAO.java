@@ -1,7 +1,7 @@
 package DAO;
 
 import Persistencia.JPA;
-import br.com.senac.projetointegradordb.Contracheque;
+import com.myproject.modelo.Contracheque;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import java.time.LocalDate;

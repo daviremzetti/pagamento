@@ -2,7 +2,7 @@
 package DAO;
 
 import Persistencia.JPA;
-import br.com.senac.projetointegradordb.PostoGraduacao;
+import com.myproject.modelo.PostoGraduacao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import java.util.List;

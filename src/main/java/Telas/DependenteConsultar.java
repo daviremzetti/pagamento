@@ -1,10 +1,10 @@
 package Telas;
 
 import Subtelas.MilitarConsultarPara;
-import br.com.senac.projetointegradordb.Dependente;
 import DAO.DependenteDAO;
 import Servicos.DependenteServicos;
-import br.com.senac.projetointegradordb.Militar;
+import com.myproject.modelo.Dependente;
+import com.myproject.modelo.Militar;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 

@@ -1,31 +1,31 @@
 
-package br.com.senac.projetointegradordb;
+package com.myproject.modelo;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 /**
  *
  * @author daviremzetti
  */
-@Entity(name="endereco")
+@Entity @Table(name = "endereco")
 public class Endereco {
     
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name="id_endereco")
-    int id;
-    String logradouro;
-    String numero;
-    String bairro;
-    String cidade;
-    String uf;
-    String cep;
-    String complemento;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id_endereco;
+    private String logradouro;
+    private String numero;
+    private String bairro;
+    private String cidade;
+    private String uf;
+    private String cep;
+    private String complemento;
 
     public int getId() {
-        return id;
+        return id_endereco;
     }
 
     public String getLogradouro() {
@@ -57,7 +57,7 @@ public class Endereco {
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.id_endereco = id;
     }
 
     public void setLogradouro(String logradouro) {

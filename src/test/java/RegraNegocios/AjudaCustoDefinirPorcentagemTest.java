@@ -2,7 +2,7 @@ package RegraNegocios;
 
 import DAO.MilitarDAO;
 import Servicos.MilitarServicos;
-import br.com.senac.projetointegradordb.Militar;
+import com.myproject.modelo.Militar;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

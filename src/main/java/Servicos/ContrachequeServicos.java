@@ -2,7 +2,7 @@
 package Servicos;
 
 import DAO.ContrachequeDAO;
-import br.com.senac.projetointegradordb.Contracheque;
+import com.myproject.modelo.Contracheque;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -38,11 +38,7 @@ public class ContrachequeServicos {
     public boolean conferirGerados(LocalDate data) {
         boolean gerado;
         int quantidade = dao.conferirGerados(data);
-        if(quantidade > 0){
-            gerado = true;
-        }else{
-            gerado = false;
-        }
+        gerado = quantidade > 0;
         return gerado;
     }
     

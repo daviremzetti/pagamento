@@ -1,19 +1,23 @@
 package Telas;
 
 import DAO.EnderecoDAO;
-import br.com.senac.projetointegradordb.Endereco;
+
 import Exceptions.ExceptionVazio;
-import br.com.senac.projetointegradordb.Lotacao;
+
 import DAO.LotacaoDAO;
-import br.com.senac.projetointegradordb.Militar;
+
 import DAO.MilitarDAO;
-import br.com.senac.projetointegradordb.PostoGraduacao;
+
 import DAO.PostoGraduacaoDAO;
 import Servicos.EnderecoServicos;
 import Servicos.LotacaoServicos;
 import Servicos.MilitarServicos;
 import Servicos.PostoGraduacaoServicos;
 import Servicos.WebService;
+import com.myproject.modelo.Endereco;
+import com.myproject.modelo.Lotacao;
+import com.myproject.modelo.Militar;
+import com.myproject.modelo.PostoGraduacao;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -503,15 +507,16 @@ public class MilitarCadastrar extends javax.swing.JFrame {
         
         String numero = TfNumero.getText();
         String cep = TfCep.getText();
-        EnderecoServicos servicoEndereco = new EnderecoServicos(new EnderecoDAO());
+        EnderecoDAO daoEnd = new EnderecoDAO();
+        EnderecoServicos servicoEndereco = new EnderecoServicos(daoEnd);
         servicoEndereco.setEndereco(endereco);
-        Endereco novoEndereco = servicoEndereco.cadastrar(numero, cep);
+        Endereco novoEndereco = servicoEndereco.cadastrar(cep, numero);
         
         String nome = TfNome.getText().toUpperCase();
         String cpf = TfCpf.getText();
         String matricula = TfMatricula.getText();
 
-        String postoSelecionado = (String) CbPosto.getSelectedItem();
+        String postoSelecionado = CbPosto.getSelectedItem().toString();
         PostoGraduacao posto = selecionarPosto(postoSelecionado);
 
         String lotacaoDigitada = (String) CbLotacao.getSelectedItem();
@@ -578,7 +583,8 @@ public class MilitarCadastrar extends javax.swing.JFrame {
      * @return
      */
     private Lotacao selecionarLotacao(String lotacaoSelecionada) {
-        LotacaoServicos servicoLot = new LotacaoServicos(new LotacaoDAO());
+        LotacaoDAO dao = new LotacaoDAO();
+        LotacaoServicos servicoLot = new LotacaoServicos(dao);
         Lotacao lotacao = servicoLot.buscarNome(lotacaoSelecionada);
         return lotacao;
     }
@@ -590,7 +596,8 @@ public class MilitarCadastrar extends javax.swing.JFrame {
      * @return
      */
     private PostoGraduacao selecionarPosto(String postoSelecionado) {
-        PostoGraduacaoServicos postoGradServ = new PostoGraduacaoServicos(new PostoGraduacaoDAO());
+        PostoGraduacaoDAO dao = new PostoGraduacaoDAO();
+        PostoGraduacaoServicos postoGradServ = new PostoGraduacaoServicos(dao);
         PostoGraduacao posto = postoGradServ.buscaPostoPorNome(postoSelecionado);
         return posto;
     }

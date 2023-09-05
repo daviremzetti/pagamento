@@ -1,7 +1,7 @@
 package Servicos;
 
 import DAO.LotacaoDAO;
-import br.com.senac.projetointegradordb.Lotacao;
+import com.myproject.modelo.Lotacao;
 import java.util.List;
 
 /**

@@ -2,9 +2,9 @@ package Telas;
 
 import DAO.ContrachequeDAO;
 import Subtelas.MilitarConsultarPara;
-import br.com.senac.projetointegradordb.Contracheque;
 import Exceptions.ExceptionVazio;
 import Servicos.ContrachequeServicos;
+import com.myproject.modelo.Contracheque;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;

@@ -2,8 +2,8 @@ package Telas;
 
 import DAO.PostoGraduacaoDAO;
 import Exceptions.ExceptionVazio;
-import br.com.senac.projetointegradordb.PostoGraduacao;
 import Servicos.PostoGraduacaoServicos;
+import com.myproject.modelo.PostoGraduacao;
 import javax.swing.JOptionPane;
 
 /**

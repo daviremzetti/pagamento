@@ -2,8 +2,8 @@
 package Servicos;
 
 import DAO.DependenteDAO;
-import br.com.senac.projetointegradordb.Dependente;
-import br.com.senac.projetointegradordb.Militar;
+import com.myproject.modelo.Dependente;
+import com.myproject.modelo.Militar;
 import java.util.List;
 
 /**

@@ -2,8 +2,8 @@ package RegraNegocios;
 
 import DAO.MovimentacaoDAO;
 import Servicos.MovimentacaoServicos;
-import br.com.senac.projetointegradordb.Militar;
-import br.com.senac.projetointegradordb.Movimentacao;
+import com.myproject.modelo.Militar;
+import com.myproject.modelo.Movimentacao;
 
 /**
  *
@@ -17,7 +17,7 @@ public class AjudaCustoLancarContracheque {
     private static Movimentacao mov;
     
     public static float aliquota(Militar novoMilitar) {
-        mov = servicoMov.verificarPagamento(novoMilitar);
+        mov = (Movimentacao) servicoMov.verificarPagamento(novoMilitar);
         float aliquota = 0;
         if (mov != null) {
             aliquota = mov.getPorcentagem();

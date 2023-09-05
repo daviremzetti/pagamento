@@ -1,5 +1,5 @@
 
-package br.com.senac.projetointegradordb;
+package com.myproject.modelo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,12 +16,12 @@ import jakarta.persistence.Table;
 public class RelacaoDependencia {
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int Id;
     @Column(name="Nome_Relacao")
     private String nomeRelacao;
 
     public int getId() {
-        return id;
+        return Id;
     }
 
     public String getNomeRelacao() {

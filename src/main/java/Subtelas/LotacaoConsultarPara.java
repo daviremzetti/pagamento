@@ -1,9 +1,9 @@
 package Subtelas;
 
 import DAO.LotacaoDAO;
-import br.com.senac.projetointegradordb.Lotacao;
 import Servicos.LotacaoServicos;
 import Telas.MovimentacaoCadastrar;
+import com.myproject.modelo.Lotacao;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;

@@ -3,3 +3,4 @@ RegraNegocios\AjudaCustoDefinirPorcentagemTest.class
 Servicos\ContrachequeServicosTest.class
 RegraNegocios\ImpostoRendaRetidoFonteTest.class
 RegraNegocios\PrevidenciaTest.class
+Servicos\EnderecoServicosTest.class

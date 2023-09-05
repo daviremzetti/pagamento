@@ -1,8 +1,8 @@
 package Telas;
 
-import br.com.senac.projetointegradordb.Lotacao;
 import DAO.LotacaoDAO;
 import Servicos.LotacaoServicos;
+import com.myproject.modelo.Lotacao;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -429,9 +429,7 @@ public class LotacaoConsultar extends javax.swing.JFrame {
     }//GEN-LAST:event_TfPelotaoKeyReleased
 
     private void ConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarActionPerformed
-
         List<Lotacao>lista;
-        
         String batalhao = TfBatalhao.getText();
         String companhia = TfCompanhia.getText();
         String pelotao = TfPelotao.getText();

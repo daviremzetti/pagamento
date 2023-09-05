@@ -2,7 +2,7 @@
 package DAO;
 
 import Persistencia.JPA;
-import br.com.senac.projetointegradordb.Lotacao;
+import com.myproject.modelo.Lotacao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import java.util.List;

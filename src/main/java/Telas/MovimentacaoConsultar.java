@@ -1,9 +1,9 @@
 
 package Telas;
 
-import br.com.senac.projetointegradordb.Movimentacao;
 import DAO.MovimentacaoDAO;
 import Servicos.MovimentacaoServicos;
+import com.myproject.modelo.Movimentacao;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 

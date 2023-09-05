@@ -2,7 +2,7 @@
 package DAO;
 
 import Persistencia.JPA;
-import br.com.senac.projetointegradordb.RelacaoDependencia;
+import com.myproject.modelo.RelacaoDependencia;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import java.util.List;

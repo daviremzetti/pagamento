@@ -1,8 +1,8 @@
 package Telas;
 
 import DAO.MilitarDAO;
-import br.com.senac.projetointegradordb.Militar;
 import Servicos.MilitarServicos;
+import com.myproject.modelo.Militar;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 

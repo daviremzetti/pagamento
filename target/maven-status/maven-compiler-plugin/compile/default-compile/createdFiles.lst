@@ -1,6 +1,5 @@
 Subtelas\MilitarConsultarPara.class
 Telas\TelaPrincipal$13.class
-com\myproject\pitesterefatoracao\PITesteRefatoracao.class
 Telas\MilitarCadastrar$7.class
 Telas\DependenteCadastrar$6.class
 RegraNegocios\Previdencia.class
@@ -10,7 +9,6 @@ Telas\ContrachequeConsultar$16.class
 Telas\MovimentacaoCadastrar$15.class
 Subtelas\LotacaoConsultarPara$4.class
 Telas\DependenteConsultar$10.class
-br\com\senac\projetointegradordb\Endereco.class
 Telas\DependenteCadastrar$10.class
 Telas\MilitarCadastrar$1.class
 Telas\MilitarConsultar$7.class
@@ -26,7 +24,6 @@ Telas\LotacaoCadastrar$7.class
 Telas\ContrachequeGerar$15.class
 Telas\MovimentacaoCadastrar.class
 Telas\DependenteConsultar$16.class
-br\com\senac\projetointegradordb\Lotacao.class
 Telas\PostoGraduacaoConsultar$13.class
 Telas\MilitarConsultar$1.class
 Servicos\ContrachequeServicos.class
@@ -41,7 +38,6 @@ Telas\ContrachequeGerar$4.class
 Telas\MilitarConsultar$13.class
 Telas\PostoGraduacaoCadastrar$6.class
 Telas\MovimentacaoConsultar$16.class
-br\com\senac\projetointegradordb\Contracheque.class
 Telas\MilitarCadastrar$2.class
 Telas\MilitarConsultar$14.class
 Subtelas\MilitarConsultarPara$16.class
@@ -81,6 +77,7 @@ Telas\ContrachequeGerar.class
 Subtelas\MilitarConsultarPara$10.class
 Telas\MilitarCadastrar$13.class
 Telas\DependenteConsultar$11.class
+com\myproject\modelo\Competencia.class
 Telas\ContrachequeConsultar$8.class
 Telas\DependenteCadastrar$14.class
 Telas\LotacaoConsultar$3.class
@@ -101,13 +98,12 @@ Telas\MilitarCadastrar$17.class
 Telas\MovimentacaoCadastrar$7.class
 Exceptions\ExceptionLotacao.class
 Telas\MilitarConsultar$5.class
+com\myproject\modelo\PostoGraduacao.class
 Telas\DependenteConsultar$4.class
 Telas\MilitarCadastrar$14.class
 Telas\ContrachequeConsultar$15.class
 Telas\MovimentacaoCadastrar$16.class
-br\com\senac\projetointegradordb\Dependente.class
 Telas\LotacaoConsultar$19.class
-br\com\senac\projetointegradordb\Movimentacao.class
 DAO\DependenteDAO.class
 Telas\MilitarConsultar$8.class
 Telas\DependenteCadastrar$11.class
@@ -128,9 +124,9 @@ Telas\LotacaoConsultar$5.class
 Telas\MovimentacaoConsultar$13.class
 RegraNegocios\Tributos.class
 Subtelas\MilitarConsultarPara$7.class
-br\com\senac\projetointegradordb\RelacaoDependencia.class
 Servicos\MilitarServicos.class
 Telas\DependenteCadastrar.class
+com\myproject\modelo\Lotacao.class
 DAO\EnderecoDAO.class
 Telas\PostoGraduacaoConsultar$9.class
 Servicos\EnderecoServicos.class
@@ -149,19 +145,19 @@ Telas\LotacaoCadastrar$13.class
 Telas\PostoGraduacaoCadastrar$2.class
 Telas\LotacaoConsultar$6.class
 Telas\MilitarConsultar$6.class
-br\com\senac\projetointegradordb\Militar.class
 RegraNegocios\ImpostoRendaRetidoFonte.class
 Exceptions\ExceptionBatalhaoVazio.class
 Telas\PostoGraduacaoCadastrar$16.class
 Servicos\PostoGraduacaoServicos.class
+com\myproject\modelo\MainProjetoIntegrador.class
 Subtelas\MilitarConsultarPara$9.class
-br\com\senac\projetointegradordb\PostoGraduacao.class
 Telas\MilitarCadastrar$10.class
 Telas\MilitarCadastrar$4.class
 Telas\ContrachequeGerar$1.class
 Telas\LotacaoConsultar$15.class
 Telas\DependenteConsultar$13.class
 Telas\MilitarConsultar$4.class
+com\myproject\modelo\Dependente.class
 Telas\TelaPrincipal$3.class
 Telas\ContrachequeConsultar$13.class
 Telas\MovimentacaoConsultar$8.class
@@ -170,11 +166,11 @@ Telas\DependenteCadastrar$18.class
 Telas\PostoGraduacaoCadastrar$8.class
 Telas\DependenteConsultar.class
 Telas\DependenteCadastrar$3.class
+com\myproject\modelo\RelacaoDependencia.class
 DAO\CompetenciaDAO.class
 Telas\ContrachequeGerar$12.class
 Telas\PostoGraduacaoConsultar$2.class
 Telas\MovimentacaoCadastrar$18.class
-br\com\senac\projetointegradordb\Competencia.class
 Telas\LotacaoCadastrar$15.class
 Telas\LotacaoConsultar$4.class
 RegraNegocios\AjudaCustoLancarContracheque.class
@@ -203,6 +199,7 @@ Telas\MilitarConsultar$9.class
 Telas\PostoGraduacaoConsultar$10.class
 Telas\MovimentacaoCadastrar$9.class
 Telas\DependenteConsultar$2.class
+com\myproject\modelo\Militar.class
 Telas\DependenteConsultar$9.class
 Telas\PostoGraduacaoCadastrar$15.class
 Telas\MilitarCadastrar.class
@@ -212,6 +209,7 @@ Telas\MovimentacaoConsultar$3.class
 Telas\MovimentacaoCadastrar$8.class
 Telas\PostoGraduacaoConsultar.class
 Telas\LotacaoCadastrar$10.class
+com\myproject\modelo\Contracheque.class
 DAO\LotacaoDAO.class
 Telas\DependenteCadastrar$2.class
 Telas\LotacaoConsultar$9.class
@@ -278,6 +276,7 @@ Telas\ContrachequeGerar$14.class
 Telas\DependenteConsultar$15.class
 Telas\MilitarCadastrar$6.class
 Telas\TelaPrincipal$11.class
+com\myproject\modelo\Endereco.class
 Telas\MovimentacaoConsultar$5.class
 Telas\LotacaoConsultar$14.class
 Telas\MovimentacaoCadastrar$11.class
@@ -297,5 +296,6 @@ Subtelas\MilitarConsultarPara$13.class
 Telas\ContrachequeGerar$13.class
 Telas\TelaPrincipal$12.class
 Telas\LotacaoCadastrar$5.class
+com\myproject\modelo\Movimentacao.class
 Telas\ContrachequeConsultar$1.class
 Telas\PostoGraduacaoConsultar$3.class

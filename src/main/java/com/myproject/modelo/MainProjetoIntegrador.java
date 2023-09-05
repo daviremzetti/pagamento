@@ -1,6 +1,6 @@
 
 
-package com.myproject.pitesterefatoracao;
+package com.myproject.modelo;
 
 import Telas.TelaPrincipal;
 
@@ -8,7 +8,7 @@ import Telas.TelaPrincipal;
  *
  * @author davi_
  */
-public class PITesteRefatoracao {
+public class MainProjetoIntegrador {
 
     public static void main(String[] args) {
         TelaPrincipal tela = new TelaPrincipal();

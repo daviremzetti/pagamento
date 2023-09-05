@@ -1,7 +1,8 @@
 
 package RegraNegocios;
 
-import br.com.senac.projetointegradordb.Contracheque;
+import com.myproject.modelo.Contracheque;
+
 
 /**
  *

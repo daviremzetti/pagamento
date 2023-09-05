@@ -1,8 +1,8 @@
 package Servicos;
 
 import DAO.MovimentacaoDAO;
-import br.com.senac.projetointegradordb.Militar;
-import br.com.senac.projetointegradordb.Movimentacao;
+import com.myproject.modelo.Militar;
+import com.myproject.modelo.Movimentacao;
 import java.util.List;
 
 /**

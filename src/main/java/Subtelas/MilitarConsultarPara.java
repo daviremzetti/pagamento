@@ -1,6 +1,5 @@
 package Subtelas;
 
-import br.com.senac.projetointegradordb.Militar;
 import DAO.MilitarDAO;
 import Servicos.MilitarServicos;
 import Telas.ContrachequeConsultar;
@@ -15,6 +14,7 @@ import Telas.MovimentacaoCadastrar;
 import Telas.MovimentacaoConsultar;
 import Telas.PostoGraduacaoCadastrar;
 import Telas.PostoGraduacaoConsultar;
+import com.myproject.modelo.Militar;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
